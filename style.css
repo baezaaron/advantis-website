@@ -1353,3 +1353,8 @@ html {
     margin: 0.5rem 0 1rem;
     display: inline-block;
 }
+
+.read-more:visited {
+    color: #fff; /* or whatever your normal button text color is */
+    background: #1976d2; /* or your normal button background */
+}
