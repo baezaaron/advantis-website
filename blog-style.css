@@ -1,92 +1,132 @@
-.blog-container {
-    max-width: 800px;
-    margin: 2rem auto;
-    padding: 0 1rem;
+/* Use the same font as Advantis site */
+body, .blog-container, .blog-section {
+    font-family: 'Poppins', Arial, sans-serif;
 }
 
+/* Add a header image style for blog posts */
+.blog-header-image {
+    width: 100%;
+    max-height: 320px;
+    object-fit: cover;
+    border-radius: 12px 12px 0 0;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 8px rgba(26,35,126,0.08);
+}
+
+/* Enhance blog container for more space and white background */
+.blog-container {
+    max-width: 900px;
+    margin: 3rem auto;
+    padding: 0 1.5rem;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 6px 32px rgba(26,35,126,0.08);
+}
+
+/* Blog post card style with more padding and blue border accent */
 .blog-post {
     background: #fff;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 2.5rem 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(26,35,126,0.06);
+    border-left: 6px solid #1976d2;
 }
 
+/* Blog meta info styling */
 .blog-meta {
     margin-bottom: 2rem;
     color: #666;
-    font-size: 0.9rem;
+    font-size: 1rem;
+    letter-spacing: 0.02em;
 }
 
 .blog-date, .blog-author, .blog-category {
-    margin-right: 1rem;
+    margin-right: 1.5rem;
 }
 
+/* Headings with Advantis blue and more spacing */
 .blog-post h1 {
-    font-size: 2.5rem;
+    font-size: 2.8rem;
     margin-bottom: 1.5rem;
-    color: #333;
+    color: #1a237e;
+    font-weight: 700;
 }
 
 .blog-post h2 {
-    font-size: 1.8rem;
-    margin: 2rem 0 1rem;
-    color: #444;
+    font-size: 2rem;
+    margin: 2.5rem 0 1.2rem;
+    color: #1976d2;
+    font-weight: 600;
+}
+
+.blog-post h3 {
+    font-size: 1.3rem;
+    margin-top: 2rem;
+    color: #3949ab;
+    font-weight: 500;
 }
 
 .blog-post p {
-    line-height: 1.6;
-    margin-bottom: 1rem;
-    color: #555;
+    line-height: 1.7;
+    margin-bottom: 1.2rem;
+    color: #444;
+    font-size: 1.08rem;
 }
 
 .blog-post ul, .blog-post ol {
-    margin: 1rem 0;
-    padding-left: 2rem;
+    margin: 1.2rem 0;
+    padding-left: 2.2rem;
 }
 
 .blog-post li {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.7rem;
+    font-size: 1.05rem;
 }
 
 .blog-post a {
-    color: #007bff;
+    color: #1976d2;
     text-decoration: none;
+    font-weight: 500;
 }
 
 .blog-post a:hover {
     text-decoration: underline;
 }
 
+/* Section style for blog */
 .blog-section {
-  max-width: 800px;
-  margin: 40px auto;
-  padding: 32px;
+  max-width: 900px;
+  margin: 48px auto;
+  padding: 40px;
   background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  border-radius: 16px;
+  box-shadow: 0 6px 32px rgba(26,35,126,0.08);
   font-family: 'Poppins', Arial, sans-serif;
 }
 
 .blog-section h2 {
-  font-size: 2rem;
-  margin-bottom: 16px;
+  font-size: 2.2rem;
+  margin-bottom: 20px;
   color: #1a237e;
+  font-weight: 700;
 }
 
 .blog-section h3 {
   font-size: 1.3rem;
-  margin-top: 32px;
+  margin-top: 36px;
   color: #3949ab;
+  font-weight: 500;
 }
 
 .blog-section ul, .blog-section ol {
-  margin: 16px 0 16px 24px;
+  margin: 18px 0 18px 28px;
   padding: 0;
 }
 
 .blog-section li {
-  margin-bottom: 8px;
-  line-height: 1.6;
+  margin-bottom: 10px;
+  line-height: 1.7;
+  font-size: 1.05rem;
 }
 
 .blog-section strong {
