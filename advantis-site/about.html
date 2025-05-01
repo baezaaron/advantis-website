@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Advantis</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="../images/Advantis-Logo-200.png" alt="Advantis Logo" class="logo-img">
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li class="dropdown">
+                    <a href="services.html">Services <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="services.html#rpm">Remote Patient Monitoring</a>
+                        <a href="services.html#apcm">Advanced Primary Care Management</a>
+                        <a href="services.html#ccm">Chronic Care Management</a>
+                        <a href="services.html#telehealth">Telehealth</a>
+                        <a href="services.html#coordination">Care Coordination</a>     
+                        <a href="services.html#preventative">Preventative Care</a>
+                    </div>
+                </li>
+                <li><a href="resources.html">Resources</a></li>
+                <li><a href="careers.html">Careers</a></li>
+                <li><a href="contact.html" class="contact-btn">Contact Us</a></li>
+            </ul>
+            <button class="mobile-menu-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section: Mission Statement -->
+    <section class="about-hero" style="padding: 120px 0 60px; background: #f8f9fa; text-align: center;">
+        <div class="container">
+            <h1>Our Mission</h1>
+            <p style="font-size: 1.3rem; max-width: 700px; margin: 1.5rem auto;">
+                At Advantis, our mission is to improve patient outcomes by delivering proactive, data-driven healthcare solutions. We believe that quality care should be accessible to everyone, and we use real-time data to bring measurable results to the people we serve.
+            </p>
+        </div>
+    </section>
+
+    <!-- Principles/Outcomes Section -->
+    <section class="about-principles" style="padding: 60px 0; background: #fff;">
+        <div class="container">
+            <h2 style="color: #0044cc;">Bringing Measurable Outcomes with Data</h2>
+            <p style="max-width: 800px; margin: 1.5rem auto; font-size: 1.1rem;">
+                Our advanced technology allows us to monitor patient health in real-time, collecting vital data such as blood pressure, heart rate, and glucose levels. By analyzing this data, we can identify potential issues before they become serious, adjust treatment plans, and provide timely interventions. This data-driven approach leads to better health outcomes and improved quality of life for our patients.
+            </p>
+            <div class="about-values">
+                <div>
+                    <i class="fas fa-users fa-2x" style="color:#0044cc;"></i>
+                    <h3>People First</h3>
+                    <p>We build relationships based on trust and always put our patients' needs at the center of everything we do.</p>
+                </div>
+                <div>
+                    <i class="fas fa-hand-holding-heart fa-2x" style="color:#0044cc;"></i>
+                    <h3>Empathetic & Supportive</h3>
+                    <p>We understand the unique needs of every patient and work together to achieve the best outcomes.</p>
+                </div>
+                <div>
+                    <i class="fas fa-lightbulb fa-2x" style="color:#0044cc;"></i>
+                    <h3>Uncomplicated</h3>
+                    <p>We believe in clear, straightforward communication and solutions that are easy to understand and use.</p>
+                </div>
+                <div>
+                    <i class="fas fa-rocket fa-2x" style="color:#0044cc;"></i>
+                    <h3>Ambitious</h3>
+                    <p>We strive to be leaders in our field, using innovation and technology to deliver the best care possible.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Temporarily hidden team section
+    <section class="team-section" style="padding: 60px 0; background: var(--light-gray);">
+        <div class="container">
+            <h2 style="text-align: center; color: var(--primary-color); margin-bottom: 2rem;">Meet Our Leadership Team</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; font-size: 1.1rem;">
+                Our experienced team brings together expertise in healthcare, technology, and patient care to deliver innovative solutions that make a difference.
+            </p>
+            <div class="team-grid">
+                <div class="team-member" data-member="1" data-linkedin="https://www.linkedin.com/in/leonelbaez">
+                    <img src="https://via.placeholder.com/200" alt="Leonel Baez" class="team-member-img">
+                    <div class="member-info">
+                        <h3>
+                            Leonel Baez
+                            <a href="https://www.linkedin.com/in/leonelbaez" target="_blank" class="linkedin-link">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </h3>
+                        <p class="team-title">Chief Executive Officer</p>
+                    </div>
+                    <div class="team-bio" style="display: none;">
+                        <p>Leonel Baez brings over 15 years of healthcare leadership experience to his role as CEO. With a background in healthcare administration and a passion for improving patient outcomes, Leonel has led numerous successful initiatives in healthcare technology and service delivery. His vision for data-driven healthcare solutions has been instrumental in shaping Advantis's innovative approach to patient care.</p>
+                    </div>
+                </div>
+                <div class="team-member" data-member="2" data-linkedin="https://www.linkedin.com/in/aaron-baez">
+                    <img src="rpm-website/images/Aaron-headshot.jpg" alt="Aaron Baez" class="team-member-img">
+                    <div class="member-info">
+                        <h3>
+                            Aaron Baez
+                            <a href="https://www.linkedin.com/in/aaron-baez" target="_blank" class="linkedin-link">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </h3>
+                        <p class="team-title">Chief Operational Officer</p>
+                    </div>
+                    <div class="team-bio" style="display: none;">
+                        <p>Aaron Baez oversees all operational aspects of Advantis, ensuring seamless delivery of our healthcare services. With expertise in healthcare operations and technology implementation, Aaron has been crucial in developing and optimizing our service delivery systems. His focus on operational excellence and process improvement has helped establish Advantis as a leader in proactive healthcare management.</p>
+                    </div>
+                </div>
+                <div class="team-member" data-member="3" data-linkedin="https://www.linkedin.com/in/sugeyris-lopez-baez-1a6463116">
+                    <img src="https://via.placeholder.com/200" alt="Sugeyris Lopez-Baez" class="team-member-img">
+                    <div class="member-info">
+                        <h3>
+                            Sugeyris Lopez-Baez
+                            <a href="https://www.linkedin.com/in/sugeyris-lopez-baez-1a6463116" target="_blank" class="linkedin-link">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </h3>
+                        <p class="team-title">Chief Nursing Officer</p>
+                    </div>
+                    <div class="team-bio" style="display: none;">
+                        <p>Sugeyris Lopez-Baez leads our clinical operations with over a decade of nursing and healthcare management experience. Her expertise in patient care and clinical protocols ensures that Advantis delivers the highest standard of healthcare services. Sugeyris's commitment to patient-centered care and evidence-based practices has been fundamental in developing our comprehensive care programs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal for team member details -->
+        <div id="team-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn">&times;</span>
+                <img id="modal-img" src="" alt="" class="modal-img">
+                <h3 id="modal-name"></h3>
+                <a id="modal-linkedin" href="#" target="_blank" class="linkedin-link">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <p id="modal-title"></p>
+                <div id="modal-desc"></div>
+            </div>
+        </div>
+    </section>
+    -->
+
+    <!-- Call to Action Section -->
+    <section class="about-cta" style="background: #f8f9fa; padding: 60px 0; text-align: center;">
+        <div class="container">
+            <h2>Ready to Experience Data-Driven Healthcare?</h2>
+            <p>Contact us today to learn how Advantis can help you achieve better health outcomes.</p>
+            <a href="contact.html" class="btn btn-primary" style="margin-top: 1.5rem;">Get Started</a>
+        </div>
+    </section>
+
+<!-- Footer Section -->
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-grid">
+            <!-- Company Info Column -->
+            <div class="footer-column">
+                <img src="../images/Advantis-Logo-200.png" alt="Advantis Logo" class="footer-logo">
+                <div class="company-info">
+                    <p><i class="fas fa-map-marker-alt"></i> 1221 Avenue of Americas | Suite 13B</p>
+                    <p>New York, NY 10020</p>
+                    <p><i class="fas fa-phone"></i> (347) 524-2989</p>
+                    <p><i class="fas fa-envelope"></i> info@advantis.care</p>
+                </div>
+            </div>
+
+            <!-- Services Column -->
+            <div class="footer-column">
+                <h3>Services</h3>
+                <ul>
+                    <li><a href="services.html#rpm">Remote Patient Monitoring</a></li>
+                    <li><a href="services.html#apcm">Advanced Primary Care Management</a></li>
+                    <li><a href="services.html#ccm">Chronic Care Management</a></li>
+                    <li><a href="services.html#telehealth">Remote Telehealth</a></li>
+                    <li><a href="services.html#coordination">Care Coordination</a></li>
+                    <li><a href="services.html#preventative">Preventative Care</a></li>
+                </ul>
+            </div>
+
+            <!-- Quick Links Column -->
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="careers.html">Careers</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact Form Column -->
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <form class="footer-contact-form">
+                    <input type="text" placeholder="Name" required>
+                    <input type="text" placeholder="Company" required>
+                    <input type="email" placeholder="Email" required>
+                    <select required>
+                        <option value="">Where did you hear about us?</option>
+                        <option value="search">Search Engine</option>
+                        <option value="social">Social Media</option>
+                        <option value="referral">Referral</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <textarea placeholder="Message" required></textarea>
+                    <div class="g-recaptcha" data-sitekey="6LepWCorAAAAACKOTeqIfRkulqMHijMDkpvqm8fO"></div>
+                    <button type="submit" class="btn btn-primary">Send</button>
+                </form>
+                <p class="form-disclaimer">This site is protected by reCAPTCHA and the Google 
+                    <a href="https://policies.google.com/privacy">Privacy Policy</a> and 
+                    <a href="https://policies.google.com/terms">Terms of Service</a> apply.
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Add this before </body> -->
+<script src="script.js"></script>
+</body>
+</html> 
