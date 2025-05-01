@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources - Advantis</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="/">
+                    <img src="../images/Advantis-Logo-200.png" alt="Advantis Logo" class="logo-img">
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li class="dropdown">
+                    <a href="services.html">Services <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="services.html#rpm">Remote Patient Monitoring</a>
+                        <a href="services.html#apcm">Advanced Primary Care Management</a>
+                        <a href="services.html#ccm">Chronic Care Management</a>
+                        <a href="services.html#telehealth">Telehealth</a>
+                        <a href="services.html#coordination">Care Coordination</a>     
+                        <a href="services.html#preventative">Preventative Care</a>
+                    </div>
+                </li>
+                <li><a href="resources.html">Resources</a></li>
+                <li><a href="careers.html">Careers</a></li>
+                <li><a href="contact.html" class="contact-btn">Contact Us</a></li>
+            </ul>
+            <button class="mobile-menu-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Resources Hero Section -->
+    <section class="resources-hero">
+        <div class="container">
+            <h1>Resources</h1>
+            <div class="resources-hero-content">
+                <h2>Helping You Stay Informed</h2>
+                <p>A collection of news, guides, and case studies to help understand all things remote patient monitoring.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Filter Section -->
+    <section class="resources-filter">
+        <div class="container">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All Resources</button>
+                <button class="filter-btn" data-filter="blog">Blog</button>
+                <button class="filter-btn" data-filter="news">News</button>
+                <button class="filter-btn" data-filter="case">Case Studies</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Grid -->
+    <section class="resources-grid">
+        <div class="container">
+            <div class="resources-container">
+                <!-- News Example
+                <article class="resource-card news">
+                    <div class="resource-content">
+                        <span class="resource-type">News</span>
+                        <h3>Advantis Expands Remote Patient Monitoring Services</h3>
+                        <p class="date">August 30, 2023</p>
+                        <p class="excerpt">Learn about our latest expansion in remote patient monitoring services and how it benefits our patients...</p>
+                        <a href="#" class="read-more">Read More</a>
+                    </div>
+                </article>
+            -->
+                <!-- Blog Example -->
+                <article class="resource-card blog">
+                    <div class="resource-content">
+                        <span class="resource-type">Blog</span>
+                        <h3>FQHCs Moving Towards Remote Patient Monitoring</h3>
+                        <p class="date">April 15, 2025</p>
+                        <p class="excerpt">A comprehensive guide to remote patient monitoring in the FQHC landscape...</p>
+                        <a href="blog-posts-html/chronic-care-management.html">Read more</a>
+                    </div>
+                </article>
+
+                <!-- Case Study Example
+                <article class="resource-card case">
+                    <div class="resource-content">
+                        <span class="resource-type">Case</span>
+                        <h3>Remote Patient Monitoring (RPM)</h3>
+                        <p class="excerpt">Understanding how we can be of value to you...</p>
+                        <a href="#" class="read-more">Read More</a>
+                    </div>
+                </article>
+
+                <!-- New Blog Example 
+                <article class="resource-card blog">
+                    <div class="resource-content">
+                        <span class="resource-type">Blog</span>
+                        <h3>The Future of Telehealth</h3>
+                        <p class="date">September 1, 2023</p>
+                        <p class="excerpt">Explore how telehealth is transforming healthcare delivery and what the future holds...</p>
+                        <a href="article-future-telehealth.html" class="read-more">Read More</a>
+                    </div>
+                </article>
+            -->
+            </div>
+            
+            <!-- Pagination -->
+            <div class="pagination">
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+            </div>
+        </div>
+    </section>
+
+<!-- Footer Section -->
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-grid">
+            <!-- Company Info Column -->
+            <div class="footer-column">
+                <img src="../images/Advantis-Logo-200.png" alt="Advantis Logo" class="footer-logo">
+                <div class="company-info">
+                    <p><i class="fas fa-map-marker-alt"></i> 1221 Avenue of Americas | Suite 13B</p>
+                    <p>New York, NY 10020</p>
+                    <p><i class="fas fa-phone"></i> (347) 524-2989</p>
+                    <p><i class="fas fa-envelope"></i> info@advantis.care</p>
+                </div>
+            </div>
+
+            <!-- Services Column -->
+            <div class="footer-column">
+                <h3>Services</h3>
+                <ul>
+                    <li><a href="services.html#rpm">Remote Patient Monitoring</a></li>
+                    <li><a href="services.html#apcm">Advanced Primary Care Management</a></li>
+                    <li><a href="services.html#ccm">Chronic Care Management</a></li>
+                    <li><a href="services.html#telehealth">Remote Telehealth</a></li>
+                    <li><a href="services.html#coordination">Care Coordination</a></li>
+                    <li><a href="services.html#preventative">Preventative Care</a></li>
+                </ul>
+            </div>
+
+            <!-- Quick Links Column -->
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="careers.html">Careers</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact Form Column -->
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <form class="footer-contact-form">
+                    <input type="text" placeholder="Name" required>
+                    <input type="text" placeholder="Company" required>
+                    <input type="email" placeholder="Email" required>
+                    <select required>
+                        <option value="">Where did you hear about us?</option>
+                        <option value="search">Search Engine</option>
+                        <option value="social">Social Media</option>
+                        <option value="referral">Referral</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <textarea placeholder="Message" required></textarea>
+                    <div class="g-recaptcha" data-sitekey="6LepWCorAAAAACKOTeqIfRkulqMHijMDkpvqm8fO"></div>
+                    <button type="submit" class="btn btn-primary">Send</button>
+                </form>
+                <p class="form-disclaimer">This site is protected by reCAPTCHA and the Google 
+                    <a href="https://policies.google.com/privacy">Privacy Policy</a> and 
+                    <a href="https://policies.google.com/terms">Terms of Service</a> apply.
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <script src="script.js"></script>
+</body>
+</html> 
