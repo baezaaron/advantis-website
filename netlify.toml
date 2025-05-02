@@ -1,0 +1,32 @@
+[build]
+  publish = "/"
+
+# Force HTTPS and prevent redirect loops
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+    Pragma = "no-cache"
+    Expires = "0"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+
+# Handle 404 errors with custom page
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = false
+  conditions = {Path = {match = "!(*.js|*.css|*.svg|*.jpg|*.png|*.gif|*.ico|*.woff|*.woff2|*.ttf|*.eot|*.map|*.json|*.html|*.xml|*.txt)"}}
+
+# Prevent redirect loops by not redirecting these pages
+[[redirects]]
+  from = "/fix-redirects.html"
+  to = "/fix-redirects.html"
+  status = 200
+
+[[redirects]]
+  from = "/redirect-fix.html"
+  to = "/redirect-fix.html"
+  status = 200 

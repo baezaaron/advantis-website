@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Page Not Found - Advantis</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
+        }
+        .error-container {
+            max-width: 600px;
+            padding: 2rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .logo {
+            margin-bottom: 2rem;
+        }
+        .logo img {
+            max-width: 200px;
+            height: auto;
+        }
+        h1 {
+            font-size: 1.8rem;
+            color: #2C3E50;
+            margin-bottom: 1rem;
+        }
+        p {
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+        .btn {
+            display: inline-block;
+            background: #0066CC;
+            color: white;
+            text-decoration: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            background: #005bb8;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+        .links {
+            margin-top: 2rem;
+        }
+        .links a {
+            display: inline-block;
+            margin: 0 10px;
+            color: #0066CC;
+            text-decoration: none;
+        }
+        .links a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 480px) {
+            .error-container {
+                padding: 1.5rem;
+            }
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+    <script>
+        // Redirect script for handling common URL issues
+        window.addEventListener('DOMContentLoaded', function() {
+            // Check if this is a potential redirect loop or 404
+            const redirectAttempt = sessionStorage.getItem('redirectAttempt') || 0;
+            sessionStorage.setItem('redirectAttempt', parseInt(redirectAttempt) + 1);
+            
+            // If we've tried redirecting too many times, stop to prevent loops
+            if (parseInt(redirectAttempt) > 3) {
+                console.log('Too many redirect attempts, staying on 404 page');
+                document.getElementById('redirect-warning').style.display = 'block';
+                return;
+            }
+            
+            // Try to fix common URL issues
+            const path = window.location.pathname;
+            
+            // If trying to access a page without .html extension, add it
+            if (!path.endsWith('.html') && !path.endsWith('/') && !path.includes('.')) {
+                window.location.href = path + '.html';
+            } 
+            // If it ends with /, try to redirect to index.html
+            else if (path.endsWith('/') && path !== '/') {
+                window.location.href = path + 'index.html';
+            }
+            // If all else fails, we stay on the 404 page
+        });
+    </script>
+</head>
+<body>
+    <div class="error-container">
+        <div class="logo">
+            <img src="images/Advantis-Logo-200.png" alt="Advantis Logo">
+        </div>
+        
+        <h1>Page Not Found</h1>
+        
+        <p>We're sorry, but the page you were looking for doesn't exist or has been moved.</p>
+        
+        <div id="redirect-warning" style="display: none; background: #fff3cd; padding: 1rem; border-radius: 4px; margin-bottom: 1.5rem;">
+            <p style="margin-bottom: 0; color: #856404;">We detected potential redirect issues. Try clearing your browser cache or using the troubleshooting page.</p>
+        </div>
+        
+        <a href="index.html" class="btn">Go to Homepage</a>
+        
+        <div class="links">
+            <a href="fix-redirects.html">Having Trouble?</a>
+            <a href="contact.html">Contact Us</a>
+        </div>
+    </div>
+</body>
+</html> 
