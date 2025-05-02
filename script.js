@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add anchor link offset handling
     handleAnchorLinks();
     
-    // Mobile Menu Toggle
+    // Mobile Menu Toggle - enhanced implementation
     setupMobileMenu();
     
     // Contact Form
@@ -36,7 +36,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             
+            // Extract the current href without any query parameters
             const currentHref = link.getAttribute('href').split('?')[0];
+            // Add timestamp as version parameter 
             link.setAttribute('href', `${currentHref}?v=${timestamp}`);
             console.log(`Refreshed: ${link.getAttribute('href')}`);
         });
@@ -104,48 +106,87 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Setup mobile menu functionality
+    // Setup mobile menu functionality - improved implementation
     function setupMobileMenu() {
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
         const navLinks = document.querySelector('.nav-links');
+        const navContainer = document.querySelector('.nav-container');
         const dropdowns = document.querySelectorAll('.dropdown');
         
-        if (mobileMenuBtn) {
-            mobileMenuBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                this.classList.toggle('active');
-                navLinks.classList.toggle('active');
-                document.body.classList.toggle('menu-open');
-                console.log("Mobile menu toggled");
-            });
+        if (!mobileMenuBtn || !navLinks) return;
+        
+        // Fix for iOS Safari - ensure menu button works correctly
+        mobileMenuBtn.addEventListener('touchstart', function(e) {
+            e.preventDefault(); // Prevent default behavior for touch events
+            toggleMobileMenu();
+        });
+        
+        mobileMenuBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            toggleMobileMenu();
+        });
+        
+        function toggleMobileMenu() {
+            mobileMenuBtn.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            document.body.classList.toggle('menu-open');
+            console.log("Mobile menu toggled");
         }
         
-        // Handle dropdowns in mobile view
+        // Improved dropdown handling in mobile view
         dropdowns.forEach(dropdown => {
             const link = dropdown.querySelector('a');
-            if (link) {
+            const dropdownContent = dropdown.querySelector('.dropdown-content');
+            
+            if (link && dropdownContent) {
+                // Create a toggle indicator for mobile view
+                const toggleIndicator = document.createElement('span');
+                toggleIndicator.className = 'dropdown-toggle';
+                toggleIndicator.innerHTML = '<i class="fas fa-chevron-down"></i>';
+                
                 link.addEventListener('click', function(e) {
                     if (window.innerWidth <= 900) {
                         e.preventDefault();
                         e.stopPropagation();
+                        
                         const wasActive = dropdown.classList.contains('active');
                         
                         // Close all other dropdowns
-                        dropdowns.forEach(d => d.classList.remove('active'));
+                        dropdowns.forEach(d => {
+                            if (d !== dropdown) d.classList.remove('active');
+                        });
                         
                         // Toggle clicked dropdown
-                        if (!wasActive) {
-                            dropdown.classList.add('active');
-                        }
+                        dropdown.classList.toggle('active');
                     }
                 });
+                
+                // Prevent dropdown content clicks from closing the menu
+                if (dropdownContent) {
+                    dropdownContent.addEventListener('click', function(e) {
+                        if (window.innerWidth <= 900) {
+                            e.stopPropagation();
+                        }
+                    });
+                }
             }
         });
         
         // Close mobile menu when clicking outside
         document.addEventListener('click', function(e) {
-            if (!e.target.closest('.nav-container') && navLinks && navLinks.classList.contains('active')) {
+            if (navLinks && navLinks.classList.contains('active') && 
+                !e.target.closest('.nav-container')) {
                 navLinks.classList.remove('active');
+                if (mobileMenuBtn) mobileMenuBtn.classList.remove('active');
+                document.body.classList.remove('menu-open');
+                dropdowns.forEach(dropdown => dropdown.classList.remove('active'));
+            }
+        });
+        
+        // When screen size changes, reset menu state
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 900) {
+                if (navLinks) navLinks.classList.remove('active');
                 if (mobileMenuBtn) mobileMenuBtn.classList.remove('active');
                 document.body.classList.remove('menu-open');
                 dropdowns.forEach(dropdown => dropdown.classList.remove('active'));
@@ -221,6 +262,18 @@ document.addEventListener('DOMContentLoaded', function() {
             // If there are more than 6 visible items, we need pagination
             const needsPagination = visibleCards.length > 6;
             
+            // If pagination exists but we don't need it, remove it
+            if (!needsPagination && paginationContainer) {
+                paginationContainer.remove();
+                
+                // Make all cards visible again
+                visibleCards.forEach(card => {
+                    card.style.display = 'block';
+                });
+                
+                return;
+            }
+            
             // If we need pagination but don't have the container yet
             if (needsPagination && !paginationContainer) {
                 paginationContainer = document.createElement('div');
@@ -233,6 +286,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     const pageBtn = document.createElement('button');
                     pageBtn.className = 'page-btn' + (i === 1 ? ' active' : '');
                     pageBtn.textContent = i;
+                    pageBtn.setAttribute('aria-label', 'Page ' + i);
                     
                     pageBtn.addEventListener('click', function() {
                         // Update active state
@@ -248,8 +302,8 @@ document.addEventListener('DOMContentLoaded', function() {
                             card.style.display = (idx >= startIdx && idx < endIdx) ? 'block' : 'none';
                         });
                         
-                        // Scroll to top of resource section
-                        const resourcesSection = document.querySelector('.resources-grid');
+                        // Scroll to top of resources section
+                        const resourcesSection = document.querySelector('.resources-container');
                         if (resourcesSection) {
                             scrollToElementWithOffset(resourcesSection, 100);
                         }
@@ -258,37 +312,77 @@ document.addEventListener('DOMContentLoaded', function() {
                     paginationContainer.appendChild(pageBtn);
                 }
                 
-                // Add to DOM after the resources container
-                resourcesContainer.after(paginationContainer);
+                resourcesContainer.appendChild(paginationContainer);
                 
-                // Initially show only first page
+                // Show only first page
                 Array.from(visibleCards).forEach((card, idx) => {
-                    card.style.display = idx < 6 ? 'block' : 'none';
+                    card.style.display = (idx < 6) ? 'block' : 'none';
                 });
-            } 
-            // If we have pagination but don't need it
-            else if (!needsPagination && paginationContainer) {
-                paginationContainer.remove();
+            } else if (needsPagination && paginationContainer) {
+                // Update existing pagination if filter changed
+                // Remove existing buttons
+                while (paginationContainer.firstChild) {
+                    paginationContainer.removeChild(paginationContainer.firstChild);
+                }
                 
-                // Show all cards
-                visibleCards.forEach(card => card.style.display = 'block');
+                // Create new page buttons
+                const pageCount = Math.ceil(visibleCards.length / 6);
+                
+                for (let i = 1; i <= pageCount; i++) {
+                    const pageBtn = document.createElement('button');
+                    pageBtn.className = 'page-btn' + (i === 1 ? ' active' : '');
+                    pageBtn.textContent = i;
+                    pageBtn.setAttribute('aria-label', 'Page ' + i);
+                    
+                    pageBtn.addEventListener('click', function() {
+                        // Update active state
+                        document.querySelectorAll('.page-btn').forEach(btn => btn.classList.remove('active'));
+                        this.classList.add('active');
+                        
+                        // Show/hide appropriate cards
+                        const pageIndex = parseInt(this.textContent);
+                        const startIdx = (pageIndex - 1) * 6;
+                        const endIdx = startIdx + 6;
+                        
+                        Array.from(visibleCards).forEach((card, idx) => {
+                            card.style.display = (idx >= startIdx && idx < endIdx) ? 'block' : 'none';
+                        });
+                        
+                        // Scroll to top of resources section
+                        const resourcesSection = document.querySelector('.resources-container');
+                        if (resourcesSection) {
+                            scrollToElementWithOffset(resourcesSection, 100);
+                        }
+                    });
+                    
+                    paginationContainer.appendChild(pageBtn);
+                }
+                
+                // Show only first page
+                Array.from(visibleCards).forEach((card, idx) => {
+                    card.style.display = (idx < 6) ? 'block' : 'none';
+                });
             }
         }
         
+        // Apply filters and update pagination
         filterButtons.forEach(button => {
-            button.addEventListener('click', () => {
+            button.addEventListener('click', function() {
                 // Remove active class from all buttons
                 filterButtons.forEach(btn => btn.classList.remove('active'));
+                
                 // Add active class to clicked button
-                button.classList.add('active');
+                this.classList.add('active');
                 
-                const filter = button.dataset.filter;
+                const filter = this.getAttribute('data-filter');
                 
+                // Show/hide cards based on filter
                 resourceCards.forEach(card => {
-                    if (filter === 'all' || card.classList.contains(filter)) {
+                    if (filter === 'all') {
                         card.style.display = 'block';
                     } else {
-                        card.style.display = 'none';
+                        const cardTypes = card.getAttribute('data-type').split(' ');
+                        card.style.display = cardTypes.includes(filter) ? 'block' : 'none';
                     }
                 });
                 
@@ -297,7 +391,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
         
-        // Run initially to set up pagination if needed
+        // Initialize pagination on page load
         updatePagination();
     }
     

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Aggressive cache busting -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Fix Redirect Issues - Advantis</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f7f9fc;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #0066CC;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 2rem;
+        }
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .logo img {
+            max-width: 200px;
+        }
+        .intro {
+            background-color: #e9f5ff;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 30px;
+            border-left: 5px solid #0066CC;
+        }
+        .method {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+        }
+        .method h2 {
+            color: #0066CC;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+        h3 {
+            margin: 15px 0 10px;
+            color: #2C3E50;
+        }
+        ol, ul {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        .button {
+            display: inline-block;
+            background-color: #0066CC;
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .button:hover {
+            background-color: #0055aa;
+        }
+        .action-center {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .advanced {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+        .code {
+            background-color: #f1f1f1;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: monospace;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+        .direct-link {
+            display: block;
+            margin: 15px 0;
+            padding: 10px;
+            background: #f5f5f5;
+            border-radius: 4px;
+            text-align: center;
+            font-weight: bold;
+            color: #0066CC;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="images/Advantis-Logo-200.png" alt="Advantis Logo">
+        </div>
+        
+        <h1>Fix Redirect Issues</h1>
+        
+        <div class="intro">
+            <p>If you're seeing a <strong>"too many redirects"</strong> error or having trouble accessing our website, try the solutions below. These steps will help clear browser cache issues and fix redirect problems.</p>
+        </div>
+        
+        <div class="method">
+            <h2>Method 1: Try Direct Links</h2>
+            <p>Click on these direct links to access our pages without redirection:</p>
+            <a href="https://advantis.care/index.html" class="direct-link">Homepage (index.html)</a>
+            <a href="https://advantis.care/services.html" class="direct-link">Services Page</a>
+            <a href="https://advantis.care/about.html" class="direct-link">About Page</a>
+            <a href="https://advantis.care/contact.html" class="direct-link">Contact Page</a>
+        </div>
+        
+        <div class="method">
+            <h2>Method 2: Clear Your Browser Cache</h2>
+            
+            <h3>Chrome:</h3>
+            <ol>
+                <li>Press <strong>Ctrl+Shift+Delete</strong> (Windows) or <strong>Cmd+Shift+Delete</strong> (Mac)</li>
+                <li>Set time range to "All time"</li>
+                <li>Check "Cookies and site data" and "Cached images and files"</li>
+                <li>Click "Clear data"</li>
+                <li>After clearing, close all Chrome windows and reopen</li>
+            </ol>
+            
+            <h3>Firefox:</h3>
+            <ol>
+                <li>Press <strong>Ctrl+Shift+Delete</strong> (Windows) or <strong>Cmd+Shift+Delete</strong> (Mac)</li>
+                <li>Set time range to "Everything"</li>
+                <li>Select "Cookies" and "Cache"</li>
+                <li>Click "Clear Now"</li>
+                <li>Restart Firefox</li>
+            </ol>
+            
+            <h3>Safari:</h3>
+            <ol>
+                <li>Click Safari in the menu bar then "Preferences"</li>
+                <li>Go to the "Advanced" tab</li>
+                <li>Check "Show Develop menu in menu bar"</li>
+                <li>Close preferences and click "Develop" in the menu bar</li>
+                <li>Select "Empty Caches"</li>
+                <li>Also go to Safari > "Clear History..." and clear all history</li>
+            </ol>
+            
+            <h3>Edge:</h3>
+            <ol>
+                <li>Press <strong>Ctrl+Shift+Delete</strong></li>
+                <li>Select "All time" for time range</li>
+                <li>Check "Cookies and other site data" and "Cached images and files"</li>
+                <li>Click "Clear now"</li>
+                <li>Restart Edge</li>
+            </ol>
+        </div>
+        
+        <div class="method">
+            <h2>Method 3: Try Incognito/Private Mode</h2>
+            <p>Using private browsing mode can bypass many cache-related issues:</p>
+            <ul>
+                <li><strong>Chrome:</strong> Press Ctrl+Shift+N (Windows) or Cmd+Shift+N (Mac)</li>
+                <li><strong>Firefox:</strong> Press Ctrl+Shift+P (Windows) or Cmd+Shift+P (Mac)</li>
+                <li><strong>Safari:</strong> Click File > New Private Window or press Cmd+Shift+N</li>
+                <li><strong>Edge:</strong> Press Ctrl+Shift+N</li>
+            </ul>
+            <p>Once in incognito/private mode, try accessing our website.</p>
+        </div>
+        
+        <div class="method">
+            <h2>Method 4: Try a Different Browser</h2>
+            <p>If you're still having issues, try accessing our website using a different browser like Chrome, Firefox, Edge, or Safari.</p>
+        </div>
+        
+        <div class="method advanced">
+            <h2>Advanced: Manual DNS Flush (Windows Only)</h2>
+            <p>If none of the above solutions work, try flushing your DNS cache:</p>
+            <ol>
+                <li>Open Command Prompt as Administrator</li>
+                <li>Type the following command and press Enter:</li>
+                <div class="code">ipconfig /flushdns</div>
+                <li>You should see "Successfully flushed the DNS Resolver Cache"</li>
+                <li>Try accessing our website again</li>
+            </ol>
+        </div>
+        
+        <div class="action-center">
+            <p>If you continue to experience issues after trying these solutions, please contact us:</p>
+            <a href="mailto:info@advantis.care" class="button">Email Us for Support</a>
+        </div>
+    </div>
+</body>
+</html> 

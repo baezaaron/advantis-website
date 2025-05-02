@@ -1,30 +1,64 @@
-# Prevent redirect loops
+# Enhanced configuration to prevent redirect loops
 <IfModule mod_rewrite.c>
   RewriteEngine On
   
-  # Ensure HTTPS only if not already on HTTPS and not on localhost
-  RewriteCond %{HTTPS} off
-  RewriteCond %{HTTP_HOST} !^localhost [NC]
-  RewriteCond %{HTTP_HOST} !^127\.0\.0\.1 [NC]
-  RewriteCond %{HTTP:X-Forwarded-Proto} !https
-  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-  
-  # Prevent redirect loops
+  # Prevent redirect loops - check if already redirected
   RewriteCond %{ENV:REDIRECT_STATUS} 200
   RewriteRule ^ - [L]
   
-  # Ensure www prefix if not already there and not on localhost
-  RewriteCond %{HTTP_HOST} !^www\. [NC]
+  # Skip HTTPS redirect if coming from a redirect or if looping detected
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteCond %{HTTPS} off
   RewriteCond %{HTTP_HOST} !^localhost [NC]
   RewriteCond %{HTTP_HOST} !^127\.0\.0\.1 [NC]
-  RewriteRule ^(.*)$ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+  RewriteCond %{REQUEST_URI} !^/fix-redirects\.html [NC]
+  RewriteCond %{REQUEST_URI} !^/redirect-fix\.html [NC]
+  RewriteCond %{HTTP_COOKIE} !^.*redirect_loop_detected=1.*$ [NC]
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+  
+  # Fallback for PHP if HTML is not working
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME}.html -f
+  RewriteRule ^(.+)$ $1.html [L]
+  
+  # Set cookie to detect loops
+  RewriteCond %{HTTP_COOKIE} redirect_loop_detected=1 [NC]
+  RewriteRule ^ - [E=REDIRECT_LOOP_DETECTED:1,L]
 </IfModule>
 
-# Set cache control for better performance
+# Use hard cache busting for all assets
+<IfModule mod_headers.c>
+  # Disable caching for all HTML, CSS, JS files
+  <FilesMatch "\.(html|css|js|php)$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+  </FilesMatch>
+  
+  # Set cookie for loop detection
+  <If "%{ENV:REDIRECT_LOOP_DETECTED} == '1'">
+    Header set Set-Cookie "redirect_loop_detected=1; Path=/; Max-Age=3600"
+  </If>
+  
+  # Allow CORS for all assets
+  Header set Access-Control-Allow-Origin "*"
+</IfModule>
+
+# Fix potential misconfiguration in the web server
+Options -MultiViews
+DirectoryIndex index.php index.html
+
+# Set cache control for assets
 <IfModule mod_expires.c>
   ExpiresActive On
-  ExpiresByType text/css "access plus 1 week"
-  ExpiresByType application/javascript "access plus 1 week"
+  
+  # HTML/CSS/JS files should not be cached due to frequent changes
+  ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType text/css "access plus 1 hour"
+  ExpiresByType application/javascript "access plus 1 hour"
+  
+  # Cache images and fonts longer
   ExpiresByType image/jpg "access plus 1 month"
   ExpiresByType image/jpeg "access plus 1 month"
   ExpiresByType image/gif "access plus 1 month"
@@ -39,7 +73,6 @@
 
 # Fix CORS issues that might affect loading resources
 <IfModule mod_headers.c>
-  Header set Access-Control-Allow-Origin "*"
   Header set Access-Control-Allow-Methods "GET, POST, OPTIONS"
   Header set Access-Control-Allow-Headers "Origin, X-Requested-With, Content-Type, Accept"
 </IfModule>
@@ -48,4 +81,13 @@
 <IfModule mod_headers.c>
   Header set X-UA-Compatible "IE=edge,chrome=1"
   Header set X-Content-Type-Options "nosniff"
-</IfModule> 
+  
+  # Vary: Accept-Encoding header improves caching with CDNs
+  Header append Vary: Accept-Encoding
+</IfModule>
+
+# Prevent direct access to system files
+<FilesMatch "(\.htaccess|\.git|\.env|wp-config\.php)$">
+  Order Allow,Deny
+  Deny from all
+</FilesMatch> 

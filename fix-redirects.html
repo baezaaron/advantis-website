@@ -3,107 +3,501 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Prevent redirect loops with aggressive cache busting -->
+    <!-- Most aggressive cache busting -->
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>Fix Redirects - Advantis</title>
+    <title>Fix Website Issues - Advantis</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         body {
             font-family: 'Arial', sans-serif;
             line-height: 1.6;
             color: #333;
+            background-color: #f7f9fc;
+            padding: 20px;
+        }
+        .container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 20px;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
         }
         h1 {
             color: #0066CC;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 2rem;
         }
-        .instructions {
-            background-color: #f8f9fa;
-            border-radius: 8px;
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .logo img {
+            max-width: 200px;
+        }
+        .intro {
+            background-color: #e9f5ff;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 30px;
+            border-left: 5px solid #0066CC;
+        }
+        .method {
+            background-color: #fff;
+            border: 1px solid #ddd;
             padding: 20px;
             margin-bottom: 20px;
+            border-radius: 6px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .method:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .method h2 {
+            color: #0066CC;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+        }
+        .method h2 i {
+            margin-right: 10px;
+            font-size: 1.6rem;
+        }
+        h3 {
+            margin: 15px 0 10px;
+            color: #2C3E50;
+        }
+        ol, ul {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+        li {
+            margin-bottom: 8px;
         }
         .button {
             display: inline-block;
             background-color: #0066CC;
             color: white;
-            padding: 10px 20px;
             text-decoration: none;
+            padding: 12px 25px;
             border-radius: 4px;
-            margin-top: 10px;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .button:hover {
+            background-color: #0055aa;
+            transform: translateY(-3px);
+        }
+        .action-center {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .advanced {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
         }
         .code {
             background-color: #f1f1f1;
-            padding: 10px;
+            padding: 15px;
             border-radius: 4px;
             font-family: monospace;
             overflow-x: auto;
+            margin: 10px 0;
+        }
+        .direct-link {
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            background: #f5f5f5;
+            border-radius: 4px;
+            text-align: center;
+            font-weight: bold;
+            color: #0066CC;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+        .direct-link:hover {
+            background: #e9f5ff;
+        }
+        .tab-container {
+            margin: 20px 0;
+        }
+        .tabs {
+            display: flex;
+            margin-bottom: 0;
+            border-bottom: 1px solid #ddd;
+        }
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border: 1px solid transparent;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+            margin-right: 5px;
+            background: #f5f5f5;
+            transition: all 0.3s ease;
+        }
+        .tab.active {
+            border: 1px solid #ddd;
+            border-bottom: 1px solid white;
+            background: white;
+            font-weight: bold;
+            color: #0066CC;
+            margin-bottom: -1px;
+        }
+        .tab-content {
+            display: none;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .progress-container {
+            margin: 20px 0;
+            background: #f5f5f5;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        .progress-bar {
+            height: 8px;
+            background: #0066CC;
+            width: 0;
+            transition: width 0.5s ease;
+        }
+        .status-message {
+            margin-top: 10px;
+            text-align: center;
+            font-weight: bold;
+            color: #0066CC;
+        }
+        
+        /* Icons */
+        .fa {
+            display: inline-block;
+            font-size: inherit;
+            text-rendering: auto;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .fa-link:before { content: "🔗"; }
+        .fa-broom:before { content: "🧹"; }
+        .fa-incognito:before { content: "🕵️"; }
+        .fa-desktop:before { content: "🖥️"; }
+        .fa-terminal:before { content: "💻"; }
+        .fa-cookie:before { content: "🍪"; }
+        
+        /* Auto-fix button */
+        #auto-fix-btn {
+            display: block;
+            width: 100%;
+            background-color: #0066CC;
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 20px 0;
+            transition: background-color 0.3s ease;
+        }
+        #auto-fix-btn:hover {
+            background-color: #0055aa;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px 15px;
+            }
+            .tabs {
+                flex-direction: column;
+                border-bottom: none;
+            }
+            .tab {
+                margin-bottom: 5px;
+                border-radius: 4px;
+            }
+            .tab.active {
+                border-bottom: 1px solid #ddd;
+            }
+            .tab-content {
+                border: 1px solid #ddd;
+                border-radius: 4px;
+            }
         }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Fix Redirect Issues</h1>
-    
-    <div class="instructions">
-        <h2>Clear Your Browser Cache</h2>
-        <p>If you're seeing a "too many redirects" error, the first step is to clear your browser cache:</p>
+    <div class="container">
+        <div class="logo">
+            <img src="images/Advantis-Logo-200.png" alt="Advantis Logo">
+        </div>
         
-        <h3>On Chrome:</h3>
-        <ol>
-            <li>Press Ctrl+Shift+Delete (Windows) or Command+Shift+Delete (Mac)</li>
-            <li>Select "Cached images and files"</li>
-            <li>Click "Clear data"</li>
-        </ol>
+        <h1>Fix Website Access Issues</h1>
         
-        <h3>On Firefox:</h3>
-        <ol>
-            <li>Press Ctrl+Shift+Delete (Windows) or Command+Shift+Delete (Mac)</li>
-            <li>Select "Cache"</li>
-            <li>Click "Clear Now"</li>
-        </ol>
+        <div class="intro">
+            <p>If you're seeing a <strong>"too many redirects"</strong> error or having trouble accessing our website, don't worry! This page will help you resolve the issue quickly. Try the automatic fix or follow the step-by-step solutions below.</p>
+        </div>
         
-        <h3>On Safari:</h3>
-        <ol>
-            <li>Go to Safari menu > Preferences > Advanced</li>
-            <li>Check "Show Develop menu in menu bar"</li>
-            <li>Go to Develop > Empty Caches</li>
-        </ol>
+        <button id="auto-fix-btn">🔧 Auto-Fix Website Issues</button>
+        
+        <div class="progress-container" style="display: none;">
+            <div class="progress-bar"></div>
+        </div>
+        <div class="status-message" style="display: none;"></div>
+        
+        <div class="method">
+            <h2><i class="fa fa-link"></i> Method 1: Try Direct Links</h2>
+            <p>Click on these direct links to access our pages without redirection:</p>
+            <a href="https://advantis.care/index.html" class="direct-link">Homepage (index.html)</a>
+            <a href="https://advantis.care/services.html" class="direct-link">Services Page</a>
+            <a href="https://advantis.care/about.html" class="direct-link">About Page</a>
+            <a href="https://advantis.care/contact.html" class="direct-link">Contact Page</a>
+            <a href="https://advantis.care/resources.html" class="direct-link">Resources Page</a>
+        </div>
+        
+        <div class="method">
+            <h2><i class="fa fa-broom"></i> Method 2: Clear Your Browser Cache</h2>
+            
+            <div class="tab-container">
+                <div class="tabs">
+                    <div class="tab active" data-tab="chrome">Chrome</div>
+                    <div class="tab" data-tab="firefox">Firefox</div>
+                    <div class="tab" data-tab="safari">Safari</div>
+                    <div class="tab" data-tab="edge">Edge</div>
+                </div>
+                
+                <div class="tab-content active" id="chrome-content">
+                    <ol>
+                        <li>Press <strong>Ctrl+Shift+Delete</strong> (Windows) or <strong>Cmd+Shift+Delete</strong> (Mac)</li>
+                        <li>Set time range to "All time"</li>
+                        <li>Check "Cookies and site data" and "Cached images and files"</li>
+                        <li>Click "Clear data"</li>
+                        <li>After clearing, close all Chrome windows and reopen</li>
+                        <li>Try accessing <a href="https://advantis.care">advantis.care</a> again</li>
+                    </ol>
+                </div>
+                
+                <div class="tab-content" id="firefox-content">
+                    <ol>
+                        <li>Press <strong>Ctrl+Shift+Delete</strong> (Windows) or <strong>Cmd+Shift+Delete</strong> (Mac)</li>
+                        <li>Set time range to "Everything"</li>
+                        <li>Select "Cookies" and "Cache"</li>
+                        <li>Click "Clear Now"</li>
+                        <li>Restart Firefox</li>
+                        <li>Try accessing <a href="https://advantis.care">advantis.care</a> again</li>
+                    </ol>
+                </div>
+                
+                <div class="tab-content" id="safari-content">
+                    <ol>
+                        <li>Click Safari in the menu bar then "Preferences"</li>
+                        <li>Go to the "Advanced" tab</li>
+                        <li>Check "Show Develop menu in menu bar"</li>
+                        <li>Close preferences and click "Develop" in the menu bar</li>
+                        <li>Select "Empty Caches"</li>
+                        <li>Also go to Safari > "Clear History..." and clear all history</li>
+                        <li>Try accessing <a href="https://advantis.care">advantis.care</a> again</li>
+                    </ol>
+                </div>
+                
+                <div class="tab-content" id="edge-content">
+                    <ol>
+                        <li>Press <strong>Ctrl+Shift+Delete</strong></li>
+                        <li>Select "All time" for time range</li>
+                        <li>Check "Cookies and other site data" and "Cached images and files"</li>
+                        <li>Click "Clear now"</li>
+                        <li>Restart Edge</li>
+                        <li>Try accessing <a href="https://advantis.care">advantis.care</a> again</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        
+        <div class="method">
+            <h2><i class="fa fa-incognito"></i> Method 3: Try Incognito/Private Mode</h2>
+            <p>Using private browsing mode can bypass many cache-related issues:</p>
+            <ul>
+                <li><strong>Chrome:</strong> Press Ctrl+Shift+N (Windows) or Cmd+Shift+N (Mac)</li>
+                <li><strong>Firefox:</strong> Press Ctrl+Shift+P (Windows) or Cmd+Shift+P (Mac)</li>
+                <li><strong>Safari:</strong> Click File > New Private Window or press Cmd+Shift+N</li>
+                <li><strong>Edge:</strong> Press Ctrl+Shift+N</li>
+            </ul>
+            <p>Once in incognito/private mode, try accessing <a href="https://advantis.care">our website</a>.</p>
+        </div>
+        
+        <div class="method">
+            <h2><i class="fa fa-desktop"></i> Method 4: Try a Different Browser</h2>
+            <p>If you're still having issues, try accessing our website using a different browser:</p>
+            <ul>
+                <li><a href="https://www.google.com/chrome/" target="_blank">Chrome</a></li>
+                <li><a href="https://www.mozilla.org/firefox/new/" target="_blank">Firefox</a></li>
+                <li><a href="https://www.microsoft.com/edge" target="_blank">Edge</a></li>
+                <li><a href="https://www.apple.com/safari/" target="_blank">Safari</a> (Mac only)</li>
+            </ul>
+        </div>
+        
+        <div class="method">
+            <h2><i class="fa fa-cookie"></i> Method 5: Clear Site Cookies Only</h2>
+            <p>If you don't want to clear your entire browser cache, you can try clearing just the cookies for our website:</p>
+            
+            <div class="tab-container">
+                <div class="tabs">
+                    <div class="tab active" data-tab="chrome-cookies">Chrome</div>
+                    <div class="tab" data-tab="firefox-cookies">Firefox</div>
+                    <div class="tab" data-tab="safari-cookies">Safari</div>
+                    <div class="tab" data-tab="edge-cookies">Edge</div>
+                </div>
+                
+                <div class="tab-content active" id="chrome-cookies-content">
+                    <ol>
+                        <li>Click the lock icon in the address bar</li>
+                        <li>Click "Cookies"</li>
+                        <li>Select any cookies related to advantis.care</li>
+                        <li>Click "Remove"</li>
+                        <li>Reload the page</li>
+                    </ol>
+                </div>
+                
+                <div class="tab-content" id="firefox-cookies-content">
+                    <ol>
+                        <li>Click the lock icon in the address bar</li>
+                        <li>Click "Clear Cookies and Site Data"</li>
+                        <li>Confirm by clicking "Remove"</li>
+                        <li>Reload the page</li>
+                    </ol>
+                </div>
+                
+                <div class="tab-content" id="safari-cookies-content">
+                    <ol>
+                        <li>Click Safari > Preferences</li>
+                        <li>Go to the "Privacy" tab</li>
+                        <li>Click "Manage Website Data"</li>
+                        <li>Search for "advantis.care"</li>
+                        <li>Select it and click "Remove"</li>
+                        <li>Reload the page</li>
+                    </ol>
+                </div>
+                
+                <div class="tab-content" id="edge-cookies-content">
+                    <ol>
+                        <li>Click the lock icon in the address bar</li>
+                        <li>Click "Cookies"</li>
+                        <li>Select any cookies related to advantis.care</li>
+                        <li>Click "Delete"</li>
+                        <li>Reload the page</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        
+        <div class="method advanced">
+            <h2><i class="fa fa-terminal"></i> Advanced: Technical Solutions</h2>
+            <p>If none of the above solutions work, try these advanced techniques:</p>
+            
+            <h3>1. DNS Flush (Windows):</h3>
+            <ol>
+                <li>Open Command Prompt as Administrator</li>
+                <li>Type the following command and press Enter:</li>
+                <div class="code">ipconfig /flushdns</div>
+                <li>You should see "Successfully flushed the DNS Resolver Cache"</li>
+            </ol>
+            
+            <h3>2. DNS Flush (Mac):</h3>
+            <ol>
+                <li>Open Terminal</li>
+                <li>Type the following command and press Enter:</li>
+                <div class="code">sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder</div>
+                <li>Enter your admin password when prompted</li>
+            </ol>
+            
+            <h3>3. Try Alternate Connection:</h3>
+            <p>Connect to a different network (switch from WiFi to mobile hotspot or vice versa).</p>
+            
+            <h3>4. Check for Browser Extensions:</h3>
+            <p>Disable any ad blockers, privacy extensions, or VPNs temporarily and try again.</p>
+        </div>
+        
+        <div class="action-center">
+            <p>If you continue to experience issues after trying these solutions, please contact us:</p>
+            <a href="mailto:info@advantis.care" class="button">Email Us for Support</a>
+        </div>
     </div>
     
-    <div class="instructions">
-        <h2>Delete Cookies for advantis.care</h2>
-        <p>Sometimes cookies can cause redirect loops:</p>
+    <script>
+        // Tab functionality
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remove active class from all tabs
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                this.classList.add('active');
+                
+                // Hide all tab content
+                document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+                
+                // Show matching tab content
+                const tabId = this.getAttribute('data-tab');
+                document.getElementById(tabId + '-content').classList.add('active');
+            });
+        });
         
-        <h3>On Chrome:</h3>
-        <ol>
-            <li>Go to Settings > Privacy and security > Cookies and other site data</li>
-            <li>Click "See all cookies and site data"</li>
-            <li>Search for "advantis.care"</li>
-            <li>Click the trash icon to delete these cookies</li>
-        </ol>
-        
-        <h3>On Firefox:</h3>
-        <ol>
-            <li>Go to Options > Privacy & Security</li>
-            <li>Under Cookies and Site Data, click "Manage Data"</li>
-            <li>Search for "advantis.care"</li>
-            <li>Click "Remove Selected"</li>
-        </ol>
-    </div>
-    
-    <div class="instructions">
-        <h2>Try Incognito/Private Mode</h2>
-        <p>Opening the site in incognito or private browsing mode can help bypass caching issues:</p>
-        <ul>
-            <li>Chrome: Ctrl+Shift+N (Windows) or Command+Shift+N (Mac)</li>
-            <li>Firefox: Ctrl+Shift+P (Windows) or Command+Shift+P (Mac)</li>
-            <li>Safari: Command+Shift+N</li>
-        </ul>
-    </div>
-    
-    <a href="index.html" class="button">Return to Homepage</a>
+        // Auto-fix button functionality
+        document.getElementById('auto-fix-btn').addEventListener('click', function() {
+            const progressContainer = document.querySelector('.progress-container');
+            const progressBar = document.querySelector('.progress-bar');
+            const statusMessage = document.querySelector('.status-message');
+            
+            // Show progress container
+            progressContainer.style.display = 'block';
+            statusMessage.style.display = 'block';
+            statusMessage.textContent = 'Starting auto-fix process...';
+            
+            // Animate progress bar
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 5;
+                progressBar.style.width = progress + '%';
+                
+                if (progress === 30) {
+                    statusMessage.textContent = 'Clearing local cache...';
+                } else if (progress === 60) {
+                    statusMessage.textContent = 'Setting cache bypass cookies...';
+                } else if (progress === 85) {
+                    statusMessage.textContent = 'Finalizing fixes...';
+                } else if (progress >= 100) {
+                    clearInterval(interval);
+                    statusMessage.textContent = 'Fix complete! Redirecting to homepage...';
+                    
+                    // Set cookies to bypass cache
+                    document.cookie = "cache_bypass=1; path=/; max-age=3600";
+                    document.cookie = "redirect_loop_detected=0; path=/; max-age=3600";
+                    
+                    // Redirect after a short delay
+                    setTimeout(() => {
+                        window.location.href = 'index.html?nocache=' + new Date().getTime();
+                    }, 1500);
+                }
+            }, 100);
+        });
+    </script>
 </body>
 </html> 
