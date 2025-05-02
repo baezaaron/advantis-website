@@ -3,50 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Prevent redirect loops and caching issues -->
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
+    <meta name="redirect-blocker" content="true">
+    
     <title>Page Not Found - Advantis</title>
+    <link rel="icon" href="images/favicon-32x32.png" type="image/png">
+    
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Poppins', Arial, sans-serif;
-            line-height: 1.6;
+        /* Critical styles that don't rely on external CSS */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Poppins', Arial, sans-serif; 
+            line-height: 1.6; 
             color: #333;
             background-color: #f8f9fa;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
             text-align: center;
+            padding: 20px;
         }
-        .error-container {
-            max-width: 600px;
-            padding: 2rem;
-            background: white;
+        .container { 
+            width: 90%; 
+            max-width: 800px; 
+            margin: 0 auto;
+            padding: 40px 20px;
+            background-color: #fff;
             border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-top: 50px;
         }
         .logo {
-            margin-bottom: 2rem;
+            max-width: 200px;
+            margin: 0 auto 30px;
         }
         .logo img {
-            max-width: 200px;
+            max-width: 100%;
             height: auto;
         }
         h1 {
-            font-size: 1.8rem;
             color: #2C3E50;
-            margin-bottom: 1rem;
+            margin-bottom: 20px;
+            font-size: 2rem;
         }
         p {
-            margin-bottom: 1.5rem;
+            margin-bottom: 20px;
             color: #555;
         }
         .btn {
@@ -54,18 +56,13 @@
             background: #0066CC;
             color: white;
             text-decoration: none;
-            padding: 0.8rem 1.5rem;
+            padding: 12px 30px;
             border-radius: 4px;
             font-weight: 500;
-            transition: all 0.3s ease;
-        }
-        .btn:hover {
-            background: #005bb8;
-            transform: translateY(-3px);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            margin: 10px;
         }
         .links {
-            margin-top: 2rem;
+            margin-top: 40px;
         }
         .links a {
             display: inline-block;
@@ -73,67 +70,110 @@
             color: #0066CC;
             text-decoration: none;
         }
-        .links a:hover {
-            text-decoration: underline;
-        }
-        @media (max-width: 480px) {
-            .error-container {
-                padding: 1.5rem;
-            }
-            h1 {
-                font-size: 1.5rem;
-            }
+        .error-code {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+            margin: 20px 0;
+            display: none;
         }
     </style>
-    <script>
-        // Redirect script for handling common URL issues
-        window.addEventListener('DOMContentLoaded', function() {
-            // Check if this is a potential redirect loop or 404
-            const redirectAttempt = sessionStorage.getItem('redirectAttempt') || 0;
-            sessionStorage.setItem('redirectAttempt', parseInt(redirectAttempt) + 1);
-            
-            // If we've tried redirecting too many times, stop to prevent loops
-            if (parseInt(redirectAttempt) > 3) {
-                console.log('Too many redirect attempts, staying on 404 page');
-                document.getElementById('redirect-warning').style.display = 'block';
-                return;
-            }
-            
-            // Try to fix common URL issues
-            const path = window.location.pathname;
-            
-            // If trying to access a page without .html extension, add it
-            if (!path.endsWith('.html') && !path.endsWith('/') && !path.includes('.')) {
-                window.location.href = path + '.html';
-            } 
-            // If it ends with /, try to redirect to index.html
-            else if (path.endsWith('/') && path !== '/') {
-                window.location.href = path + 'index.html';
-            }
-            // If all else fails, we stay on the 404 page
-        });
-    </script>
 </head>
 <body>
-    <div class="error-container">
+    <div class="container">
         <div class="logo">
-            <img src="images/Advantis-Logo-200.png" alt="Advantis Logo">
+            <a href="index.html">
+                <img src="images/Advantis-Logo-200.png" alt="Advantis Logo">
+            </a>
         </div>
         
         <h1>Page Not Found</h1>
         
-        <p>We're sorry, but the page you were looking for doesn't exist or has been moved.</p>
+        <p>Sorry, we couldn't find the page you were looking for.</p>
         
-        <div id="redirect-warning" style="display: none; background: #fff3cd; padding: 1rem; border-radius: 4px; margin-bottom: 1.5rem;">
-            <p style="margin-bottom: 0; color: #856404;">We detected potential redirect issues. Try clearing your browser cache or using the troubleshooting page.</p>
-        </div>
+        <div id="errorDetails"></div>
         
         <a href="index.html" class="btn">Go to Homepage</a>
         
         <div class="links">
-            <a href="fix-redirects.html">Having Trouble?</a>
+            <a href="about.html">About</a>
+            <a href="services.html">Services</a>
             <a href="contact.html">Contact Us</a>
         </div>
+        
+        <div id="redirectMessage" style="margin-top: 20px; color: #cc0000; font-weight: bold; display: none;">
+            Redirect loop detected. Please clear your browser cache or try another browser.
+        </div>
+        
+        <pre class="error-code" id="errorCode"></pre>
     </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check for redirect loops
+            const visitCount = parseInt(sessionStorage.getItem('pageVisitCount') || '0');
+            sessionStorage.setItem('pageVisitCount', visitCount + 1);
+            
+            const errorDetails = document.getElementById('errorDetails');
+            const errorCode = document.getElementById('errorCode');
+            const redirectMessage = document.getElementById('redirectMessage');
+            
+            // Get the current URL and query parameters
+            const currentUrl = window.location.href;
+            const urlParams = new URLSearchParams(window.location.search);
+            
+            // Check if we're in a redirect loop
+            if (visitCount > 3) {
+                redirectMessage.style.display = 'block';
+                
+                // Attempt to diagnose issues
+                let diagnosticInfo = '';
+                
+                // Add cookie to prevent further redirects
+                document.cookie = "redirect_loop_detected=1; path=/; max-age=3600";
+                
+                // Check for common redirect-causing issues
+                if (/\.php$/.test(currentUrl)) {
+                    diagnosticInfo += "PHP files are not supported on Netlify hosting. ";
+                    errorDetails.innerHTML += "<p>It looks like you're trying to access a PHP file. This website runs on Netlify which doesn't support PHP.</p>";
+                }
+                
+                if (urlParams.has('error')) {
+                    diagnosticInfo += "Error parameter found: " + urlParams.get('error') + ". ";
+                    errorDetails.innerHTML += "<p>Error: " + urlParams.get('error') + "</p>";
+                }
+                
+                // Log diagnostic info to help with debugging
+                if (diagnosticInfo) {
+                    errorCode.textContent = diagnosticInfo;
+                    errorCode.style.display = 'block';
+                }
+            }
+            
+            // Handle various URL problems - common on Netlify sites
+            const path = window.location.pathname;
+            
+            // Try to fix common path issues
+            if (path.endsWith('/') && path !== '/') {
+                // Trailing slash issue - try removing it
+                const newPath = path.slice(0, -1);
+                errorDetails.innerHTML += "<p>We're redirecting you to a page that might exist...</p>";
+                setTimeout(() => {
+                    window.location.href = newPath;
+                }, 2000);
+            } else if (path.includes('.html') && !document.documentElement.classList.contains('netlify')) {
+                // Missing .html extension
+                const strippedPath = path.replace('.html', '');
+                errorDetails.innerHTML += "<p>We're trying an alternative URL format...</p>";
+                setTimeout(() => {
+                    window.location.href = strippedPath;
+                }, 2000);
+            }
+            
+            // Add special class to document to indicate we're on Netlify
+            document.documentElement.classList.add('netlify');
+        });
+    </script>
 </body>
 </html> 

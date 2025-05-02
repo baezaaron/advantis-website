@@ -1,0 +1,52 @@
+# Netlify _headers file - Controls HTTP headers for all routes
+
+# Global headers for all pages
+/*
+  X-Frame-Options: DENY
+  X-XSS-Protection: 1; mode=block
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: no-referrer-when-downgrade
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Access-Control-Allow-Origin: *
+  Content-Security-Policy: upgrade-insecure-requests
+  Cache-Control: public, max-age=0, must-revalidate
+
+# CSS files with explicit content type
+/*.css
+  Content-Type: text/css; charset=utf-8
+  Cache-Control: public, max-age=3600
+  X-Content-Type-Options: nosniff
+
+# JavaScript files
+/*.js
+  Content-Type: application/javascript; charset=utf-8
+  Cache-Control: public, max-age=3600
+  X-Content-Type-Options: nosniff
+
+# Image files
+/*.jpg
+  Cache-Control: public, max-age=31536000, immutable
+/*.jpeg
+  Cache-Control: public, max-age=31536000, immutable
+/*.png
+  Cache-Control: public, max-age=31536000, immutable
+/*.svg
+  Content-Type: image/svg+xml
+  Cache-Control: public, max-age=31536000, immutable
+/*.webp
+  Content-Type: image/webp
+  Cache-Control: public, max-age=31536000, immutable
+/*.ico
+  Content-Type: image/x-icon
+  Cache-Control: public, max-age=31536000, immutable
+
+# Font files
+/*.woff
+  Content-Type: font/woff
+  Cache-Control: public, max-age=31536000, immutable
+/*.woff2
+  Content-Type: font/woff2
+  Cache-Control: public, max-age=31536000, immutable
+/*.ttf
+  Content-Type: font/ttf
+  Cache-Control: public, max-age=31536000, immutable 

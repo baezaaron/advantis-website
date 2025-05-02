@@ -1,32 +1,60 @@
 [build]
   publish = "/"
 
-# Force HTTPS and prevent redirect loops
+# Global headers for all routes
 [[headers]]
   for = "/*"
   [headers.values]
-    Cache-Control = "no-cache, no-store, must-revalidate"
+    Cache-Control = "public, max-age=0, must-revalidate"
     Pragma = "no-cache"
     Expires = "0"
     X-Content-Type-Options = "nosniff"
     X-Frame-Options = "DENY"
     X-XSS-Protection = "1; mode=block"
+    Access-Control-Allow-Origin = "*"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+    
+# CSS files should be served with appropriate MIME type
+[[headers]]
+  for = "*.css"
+  [headers.values]
+    Content-Type = "text/css"
+    Cache-Control = "public, max-age=3600"
 
-# Handle 404 errors with custom page
+# Prevent redirect loops for static assets
+[[redirects]]
+  from = "/*.css"
+  to = "/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/*.js"
+  to = "/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/*.jpg"
+  to = "/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/*.png"
+  to = "/:splat"
+  status = 200
+  force = true
+
+# HTML files should be served directly with no redirects
+[[redirects]]
+  from = "/*.html"
+  to = "/:splat"
+  status = 200
+  force = true
+
+# Default fallback - serve index.html but don't create redirect loop
 [[redirects]]
   from = "/*"
   to = "/index.html"
-  status = 200
-  force = false
-  conditions = {Path = {match = "!(*.js|*.css|*.svg|*.jpg|*.png|*.gif|*.ico|*.woff|*.woff2|*.ttf|*.eot|*.map|*.json|*.html|*.xml|*.txt)"}}
-
-# Prevent redirect loops by not redirecting these pages
-[[redirects]]
-  from = "/fix-redirects.html"
-  to = "/fix-redirects.html"
-  status = 200
-
-[[redirects]]
-  from = "/redirect-fix.html"
-  to = "/redirect-fix.html"
   status = 200 
