@@ -1,3 +1,14 @@
+/* Blog styling that aligns with Vis-A-Vis inspiration */
+:root {
+    --primary-color: #0066CC;
+    --secondary-color: #2C3E50;
+    --accent-color: #38a89d;
+    --text-color: #333333;
+    --light-gray: #F8F9FA;
+    --white: #FFFFFF;
+    --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
 /* Use the same font as Advantis site */
 body, .blog-container, .blog-section {
     font-family: 'Poppins', Arial, sans-serif;
@@ -26,43 +37,46 @@ body, .blog-container, .blog-section {
 /* Blog post card style with more padding and blue border accent */
 .blog-post {
     background: #fff;
-    padding: 2.5rem 2rem;
+    padding: 2.5rem 1rem;
     border-radius: 12px;
     box-shadow: 0 2px 8px rgba(26,35,126,0.06);
-    border-left: 6px solid #1976d2;
+    border-left: 6px solid var(--primary-color);
 }
 
 /* Blog meta info styling */
 .blog-meta {
     margin-bottom: 2rem;
     color: #666;
-    font-size: 1rem;
+    font-size: 0.95rem;
     letter-spacing: 0.02em;
 }
 
 .blog-date, .blog-author, .blog-category {
     margin-right: 1.5rem;
+    display: inline-block;
+    margin-bottom: 0.5rem;
 }
 
 /* Headings with Advantis blue and more spacing */
 .blog-post h1 {
-    font-size: 2.8rem;
+    font-size: 2rem;
     margin-bottom: 1.5rem;
-    color: #1a237e;
+    color: var(--secondary-color);
     font-weight: 700;
+    line-height: 1.3;
 }
 
 .blog-post h2 {
-    font-size: 2rem;
+    font-size: 1.6rem;
     margin: 2.5rem 0 1.2rem;
-    color: #1976d2;
+    color: var(--primary-color);
     font-weight: 600;
 }
 
 .blog-post h3 {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     margin-top: 2rem;
-    color: #3949ab;
+    color: var(--secondary-color);
     font-weight: 500;
 }
 
@@ -70,7 +84,7 @@ body, .blog-container, .blog-section {
     line-height: 1.7;
     margin-bottom: 1.2rem;
     color: #444;
-    font-size: 1.08rem;
+    font-size: 1rem;
 }
 
 .blog-post ul, .blog-post ol {
@@ -80,11 +94,11 @@ body, .blog-container, .blog-section {
 
 .blog-post li {
     margin-bottom: 0.7rem;
-    font-size: 1.05rem;
+    font-size: 1rem;
 }
 
 .blog-post a {
-    color: #1976d2;
+    color: var(--primary-color);
     text-decoration: none;
     font-weight: 500;
 }
@@ -96,25 +110,25 @@ body, .blog-container, .blog-section {
 /* Section style for blog */
 .blog-section {
   max-width: 900px;
-  margin: 48px auto;
-  padding: 40px;
+  margin: 40px auto;
+  padding: 20px;
   background: #fff;
   border-radius: 16px;
-  box-shadow: 0 6px 32px rgba(26,35,126,0.08);
+  box-shadow: 0 6px 18px rgba(26,35,126,0.08);
   font-family: 'Poppins', Arial, sans-serif;
 }
 
 .blog-section h2 {
-  font-size: 2.2rem;
+  font-size: 1.8rem;
   margin-bottom: 20px;
-  color: #1a237e;
+  color: var(--secondary-color);
   font-weight: 700;
 }
 
 .blog-section h3 {
-  font-size: 1.3rem;
-  margin-top: 36px;
-  color: #3949ab;
+  font-size: 1.2rem;
+  margin-top: 30px;
+  color: var(--secondary-color);
   font-weight: 500;
 }
 
@@ -126,9 +140,181 @@ body, .blog-container, .blog-section {
 .blog-section li {
   margin-bottom: 10px;
   line-height: 1.7;
-  font-size: 1.05rem;
+  font-size: 1rem;
 }
 
 .blog-section strong {
-  color: #1976d2;
+  color: var(--primary-color);
+}
+
+/* Resources styling */
+.resources-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.resource-card {
+    background: var(--white);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+    transition: all 0.3s ease;
+}
+
+.resource-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.resource-content {
+    padding: 1.5rem;
+}
+
+.resource-type {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    background: var(--primary-color);
+    color: var(--white);
+    border-radius: 4px;
+    font-size: 0.8rem;
+    margin-bottom: 0.75rem;
+}
+
+.resource-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: var(--secondary-color);
+}
+
+.resource-card .date {
+    color: #666;
+    font-size: 0.85rem;
+    margin-bottom: 0.75rem;
+}
+
+.resource-card .excerpt {
+    margin-bottom: 1rem;
+}
+
+.resource-card a {
+    color: var(--primary-color);
+    font-weight: 500;
+    display: inline-block;
+}
+
+/* Mobile Menu Styling */
+.mobile-menu-btn {
+    display: block;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 1001;
+}
+
+.mobile-menu-btn span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--text-color);
+    margin: 5px 0;
+    transition: 0.3s;
+}
+
+.mobile-menu-btn.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.mobile-menu-btn.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu-btn.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+.nav-links {
+    display: none;
+    list-style: none;
+    margin: 0;
+    padding: 1rem;
+    background: var(--white);
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    z-index: 1000;
+}
+
+.nav-links.active {
+    display: block;
+}
+
+.nav-links li {
+    margin-bottom: 0.5rem;
+}
+
+.nav-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 0.5rem 0;
+    display: block;
+}
+
+/* Responsive styles for blog */
+@media (min-width: 768px) {
+    .blog-post {
+        padding: 2.5rem 2rem;
+    }
+    
+    .blog-post h1 {
+        font-size: 2.5rem;
+    }
+    
+    .resources-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .nav-links {
+        display: flex;
+        position: static;
+        width: auto;
+        background: none;
+        box-shadow: none;
+        padding: 0;
+    }
+    
+    .nav-links li {
+        margin: 0 0.5rem;
+    }
+    
+    .nav-links a {
+        padding: 0.5rem;
+    }
+    
+    .mobile-menu-btn {
+        display: none;
+    }
+}
+
+@media (min-width: 1024px) {
+    .blog-container {
+        padding: 0 2rem;
+    }
+    
+    .blog-post h1 {
+        font-size: 2.8rem;
+    }
+    
+    .blog-section {
+        padding: 40px;
+    }
+    
+    .resources-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
 } 
