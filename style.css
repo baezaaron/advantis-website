@@ -222,8 +222,12 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 1.8;
 }
 
-/* Responsive Design for Page-specific Sections */
+/* Consolidated Media Queries */
 @media (max-width: 1200px) {
+    .container {
+        max-width: 1140px;
+    }
+    
     .services-hero h1,
     .about-hero h1,
     .resources-hero h1,
@@ -234,6 +238,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (max-width: 992px) {
+    .container {
+        max-width: 960px;
+    }
+    
     .services-hero,
     .about-hero,
     .resources-hero,
@@ -260,12 +268,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (max-width: 768px) {
-    .services-hero,
-    .about-hero,
-    .resources-hero,
-    .careers-hero,
-    .contact-section {
-        padding: 100px 0 50px;
+    .container {
+        max-width: 720px;
+        padding: 0 1.5rem;
     }
     
     .services-hero h1,
@@ -283,6 +288,20 @@ h1, h2, h3, h4, h5, h6 {
     .careers-hero-content p,
     .contact-intro {
         font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .container {
+        max-width: 100%;
+        padding: 0 1rem;
+    }
+    
+    .services-hero,
+    .about-hero,
+    .resources-hero,
+    .careers-hero {
+        padding: 100px 0 40px;
     }
 }
 
@@ -336,13 +355,10 @@ h1, h2, h3, h4, h5, h6 {
         top: 80px;
         left: 0;
         width: 100%;
-        height: calc(100vh - 80px);
         background: var(--white);
-        padding: 1.5rem;
         flex-direction: column;
-        align-items: center;
+        padding: 1rem 0;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        overflow-y: auto;
     }
 
     .nav-links.active {
@@ -1755,5 +1771,92 @@ body.menu-open {
     .container {
         max-width: 540px;
         padding: 0 1rem;
+    }
+}
+
+/* Desktop and Tablet Navigation */
+@media (min-width: 769px) {
+    .nav-links {
+        display: flex !important;
+        position: static;
+        width: auto;
+        background: none;
+        box-shadow: none;
+        padding: 0;
+    }
+
+    .mobile-menu-btn {
+        display: none;
+    }
+
+    .dropdown-content {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        min-width: 220px;
+        background: var(--white);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        border-radius: 4px;
+        padding: 0.75rem 0;
+        display: none;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+}
+
+/* Hero Sections Enhancement */
+.services-hero,
+.about-hero,
+.resources-hero,
+.careers-hero {
+    position: relative;
+    background: linear-gradient(rgba(0, 102, 204, 0.1), rgba(0, 102, 204, 0.05));
+    border-bottom: 1px solid rgba(0, 102, 204, 0.1);
+}
+
+.services-hero::before,
+.about-hero::before,
+.resources-hero::before,
+.careers-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(0, 102, 204, 0.05) 0%, rgba(255, 255, 255, 0) 100%);
+    pointer-events: none;
+}
+
+/* Service Cards Enhancement */
+.service-detail {
+    background: var(--white);
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
+.service-detail:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Desktop and Tablet Grid Layouts */
+@media (min-width: 769px) {
+    .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin: 3rem 0;
+    }
+
+    .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 3rem;
     }
 }
