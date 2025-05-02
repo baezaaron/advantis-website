@@ -23,8 +23,17 @@ body {
     line-height: 1.6;
     color: var(--text-color);
     overflow-x: hidden;
+    overflow-y: auto;
     background-color: var(--white);
     font-size: 16px;
+    min-height: 100vh;
+    position: relative;
+    padding-top: 70px; /* Account for fixed navbar */
+}
+
+html {
+    overflow-y: auto;
+    scroll-behavior: smooth;
 }
 
 /* Base Link Styles */
@@ -64,6 +73,19 @@ p { margin-bottom: 1rem; }
     margin-left: auto;
     margin-right: auto;
     max-width: 100%;
+    overflow: hidden; /* Prevent content spillover */
+}
+
+/* Additional wrappers for image containment */
+.image-wrapper {
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.image-wrapper img {
+    max-width: 100%;
+    height: auto;
+    display: block;
 }
 
 /* Navigation - Mobile First */
@@ -138,7 +160,7 @@ p { margin-bottom: 1rem; }
 
 /* Hero Section - Mobile First */
 .hero {
-    padding-top: 90px;
+    padding-top: 2rem;
     padding-bottom: 3rem;
     background: linear-gradient(rgba(0, 102, 204, 0.1), rgba(0, 102, 204, 0.05));
     min-height: calc(100vh - 70px);
@@ -189,7 +211,7 @@ p { margin-bottom: 1rem; }
 
 /* Stats Section */
 .stats {
-    padding: 4rem 0;
+    padding: 3rem 0;
     background: var(--white);
     text-align: center;
 }
@@ -219,7 +241,7 @@ p { margin-bottom: 1rem; }
 
 /* Proactive Care Section */
 .proactive-care {
-    padding: 4rem 0;
+    padding: 3rem 0;
     background: var(--light-gray);
 }
 
@@ -230,16 +252,19 @@ p { margin-bottom: 1rem; }
 }
 
 .proactive-image {
-    position: relative;
-    height: 300px;
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    overflow: hidden;
+    border-radius: 8px;
+    margin-bottom: 2rem;
 }
 
 .proactive-img {
     width: 100%;
-    height: 100%;
+    height: auto;
+    max-width: 100%;
     object-fit: cover;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .proactive-content {
@@ -262,7 +287,7 @@ p { margin-bottom: 1rem; }
 
 /* Services Section */
 .services {
-    padding: 4rem 0;
+    padding: 3rem 0;
     background: var(--white);
     text-align: center;
 }
@@ -324,7 +349,7 @@ p { margin-bottom: 1rem; }
 
 /* Partners Section */
 .partners {
-    padding: 4rem 0;
+    padding: 3rem 0;
     background: var(--white);
     text-align: center;
     border-top: 1px solid var(--light-gray);
@@ -793,5 +818,138 @@ p { margin-bottom: 1rem; }
     text-align: center;
 }
 
+/* Resources Page */
+.resources-hero {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    background: linear-gradient(rgba(0, 102, 204, 0.1), rgba(0, 102, 204, 0.05));
+    text-align: center;
+}
+
+.resources-hero h1 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+
+.resources-hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.resources-filter {
+    padding: 1.5rem 0;
+}
+
+.filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.filter-btn {
+    padding: 0.5rem 1rem;
+    background: var(--light-gray);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.filter-btn.active {
+    background: var(--primary-color);
+    color: var(--white);
+}
+
+.resources-grid {
+    padding: 1.5rem 0 3rem;
+}
+
+.resources-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.resource-card {
+    background: var(--white);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transition: var(--transition);
+}
+
+.resource-content {
+    padding: 1.5rem;
+}
+
+.resource-type {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    background: var(--primary-color);
+    color: var(--white);
+    border-radius: 4px;
+    font-size: 0.8rem;
+    margin-bottom: 0.75rem;
+}
+
+/* Ensure all pages have proper margin-top */
+.services-hero, .contact-section, .about-hero, .careers-section {
+    padding-top: 2rem;
+}
+
 /* Only include mobile-first styles in this file.
    Desktop styles are now in desktop.css */
+
+/* Additional fixes for page scrolling */
+html, body {
+    height: 100%;
+    min-height: 100%;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+/* Resources specific fixes */
+.resources-hero {
+    margin-top: 0;
+    padding-top: 4rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* Service Detail Page Fixes */
+.services-hero {
+    margin-top: 0;
+    padding-top: 4rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* Contact Page Fixes */
+.contact-section {
+    margin-top: 0;
+    padding-top: 4rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* About Page Fixes */
+.about-hero {
+    margin-top: 0;
+    padding-top: 4rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* Careers Page Fixes */
+.careers-section {
+    margin-top: 0;
+    padding-top: 4rem;
+    position: relative;
+    z-index: 1;
+}

@@ -280,4 +280,76 @@ document.addEventListener('DOMContentLoaded', function() {
             messageDiv.remove();
         }, 5000);
     }
+
+    // Add a scroll event listener to fix potential scrolling issues
+    window.addEventListener('scroll', function() {
+        // Add a small delay to ensure smooth scrolling
+        setTimeout(function() {
+            // Force redraw to fix potential rendering issues
+            document.body.style.overflow = 'auto';
+            document.documentElement.style.overflow = 'auto';
+        }, 100);
+    });
+
+    // Ensure proper initialization after page load
+    document.addEventListener('DOMContentLoaded', function() {
+        // Fix any page scroll issues
+        document.body.style.overflow = 'auto';
+        document.documentElement.style.overflow = 'auto';
+        
+        // Mobile menu functionality
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                document.body.classList.toggle('menu-open');
+            });
+        }
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.main-nav') && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                document.body.classList.remove('menu-open');
+            }
+        });
+        
+        // Resource filtering functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const resourceCards = document.querySelectorAll('.resource-card');
+        
+        if (filterButtons.length > 0) {
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // Add active class to clicked button
+                    button.classList.add('active');
+                    
+                    const filter = button.getAttribute('data-filter');
+                    
+                    resourceCards.forEach(card => {
+                        if (filter === 'all' || card.classList.contains(filter)) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        }
+        
+        // Rest of your existing script.js functionality
+        
+        // Add this at the end to ensure proper layout after all content loads
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                window.scrollTo(0, 0);
+                document.body.style.overflow = 'auto';
+                document.documentElement.style.overflow = 'auto';
+            }, 100);
+        });
+    });
 });
