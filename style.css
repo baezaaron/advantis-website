@@ -15,6 +15,8 @@
 
 html {
     font-size: 16px;
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
 }
 
 body {
@@ -38,6 +40,7 @@ body {
     position: fixed;
     width: 100%;
     top: 0;
+    left: 0;
     z-index: 1000;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
@@ -46,7 +49,9 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem;
+    padding: 0.75rem 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
 .logo-img {
@@ -64,6 +69,8 @@ body {
     align-items: center;
     gap: 2rem;
     list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 .nav-links a {
@@ -72,6 +79,7 @@ body {
     font-weight: 500;
     font-size: 0.95rem;
     transition: var(--transition);
+    padding: 0.5rem 1rem;
 }
 
 .nav-links a:hover {
@@ -92,6 +100,7 @@ body {
     box-shadow: 0 8px 16px rgba(0,0,0,0.1);
     border-radius: 4px;
     padding: 1rem 0;
+    z-index: 1001;
 }
 
 .dropdown:hover .dropdown-content {
@@ -107,7 +116,7 @@ body {
 .contact-btn {
     background: var(--primary-color);
     color: var(--white) !important;
-    padding: 0.75rem 1.5rem;
+    padding: 0.75rem 1.5rem !important;
     border-radius: 4px;
     transition: var(--transition);
 }
@@ -244,6 +253,7 @@ body {
     color: var(--white);
     text-align: center;
     margin: 0 auto;
+    padding: 0 1rem;
 }
 
 .hero-content h1 {
@@ -272,6 +282,7 @@ body {
     text-decoration: none;
     font-weight: 500;
     transition: var(--transition);
+    text-align: center;
 }
 
 .btn-primary {
@@ -279,26 +290,51 @@ body {
     color: var(--primary-color);
 }
 
-.btn-secondary {
-    border: 2px solid var(--white);
+.btn-primary:hover {
+    background: var(--primary-color);
     color: var(--white);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-.btn:hover {
-    transform: translateY(-3px);
+/* Services Grid */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.service-card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+}
+
+/* Stats Section */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin: 3rem 0;
 }
 
 /* Responsive Design */
-@media (max-width: 1400px) {
-    .container {
-        max-width: 1200px;
-    }
-}
-
 @media (max-width: 1200px) {
     .container {
         max-width: 1140px;
         padding: 0 1.5rem;
+    }
+
+    .hero-content h1 {
+        font-size: 3rem;
     }
 }
 
@@ -307,6 +343,14 @@ body {
         max-width: 960px;
         padding: 0 1rem;
     }
+
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 @media (max-width: 768px) {
@@ -314,12 +358,33 @@ body {
         max-width: 720px;
         padding: 0 1rem;
     }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
 }
 
 @media (max-width: 576px) {
     .container {
         max-width: 540px;
         padding: 0 0.75rem;
+    }
+
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .btn {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.95rem;
     }
 }
 
@@ -334,26 +399,6 @@ body {
     font-size: 2.5rem;
     margin-bottom: 3rem;
     color: #333;
-}
-
-.services-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    margin-bottom: 2rem;
-}
-
-.service-card {
-    background: #fff;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    text-align: center;
-    transition: transform 0.3s ease;
-}
-
-.service-card:hover {
-    transform: translateY(-10px);
 }
 
 .service-card i {
@@ -401,14 +446,6 @@ body {
     font-size: 2rem;
     margin-bottom: 3rem;
     color: var(--primary-color);
-}
-
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    max-width: 1000px;
-    margin: 0 auto;
 }
 
 .stat-item {
@@ -876,26 +913,6 @@ body {
     .services-cta p {
         font-size: 1.1rem;
     }
-}
-
-html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 120px;
-}
-
-/* Update the hero button styles */
-.hero-buttons .btn {
-    padding: 1.2rem 3.5rem;
-    font-size: 1.2rem;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-}
-
-.hero-buttons .btn-primary:hover {
-    background: var(--primary-color);
-    color: var(--white);
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 /* Contact Page Styles */
