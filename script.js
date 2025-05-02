@@ -167,9 +167,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const dropdowns = document.querySelectorAll('.dropdown');
 
     if (mobileMenuBtn) {
-        mobileMenuBtn.addEventListener('click', function() {
-            navLinks.classList.toggle('active');
+        mobileMenuBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
             this.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            document.body.classList.toggle('menu-open');
         });
     }
 
@@ -179,7 +181,16 @@ document.addEventListener('DOMContentLoaded', function() {
         link.addEventListener('click', function(e) {
             if (window.innerWidth <= 900) {
                 e.preventDefault();
-                dropdown.classList.toggle('active');
+                e.stopPropagation();
+                const wasActive = dropdown.classList.contains('active');
+                
+                // Close all other dropdowns
+                dropdowns.forEach(d => d.classList.remove('active'));
+                
+                // Toggle clicked dropdown
+                if (!wasActive) {
+                    dropdown.classList.add('active');
+                }
             }
         });
     });
@@ -189,6 +200,8 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!e.target.closest('.nav-container') && navLinks.classList.contains('active')) {
             navLinks.classList.remove('active');
             mobileMenuBtn.classList.remove('active');
+            document.body.classList.remove('menu-open');
+            dropdowns.forEach(dropdown => dropdown.classList.remove('active'));
         }
     });
 
@@ -197,6 +210,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (window.innerWidth > 900) {
             navLinks.classList.remove('active');
             mobileMenuBtn.classList.remove('active');
+            document.body.classList.remove('menu-open');
             dropdowns.forEach(dropdown => dropdown.classList.remove('active'));
         }
     });
