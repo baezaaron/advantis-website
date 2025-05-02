@@ -3,11 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Prevent redirect loops -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>Resources - Advantis</title>
     <link rel="icon" href="images/favicon-32x32.png" type="image/png">
     <!-- Use a combined approach for CSS to prevent caching issues -->
-    <link rel="stylesheet" href="style.css?v=20240620">
-    <link rel="stylesheet" href="common-fixes.css?v=20240620">
+    <link rel="stylesheet" href="style.css?v=20240621">
+    <link rel="stylesheet" href="common-fixes.css?v=20240621">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
@@ -21,6 +25,11 @@
                     <img src="images/Advantis-Logo-200.png" alt="Advantis Logo" class="logo-img">
                 </a>
             </div>
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
@@ -39,11 +48,6 @@
                 <li><a href="careers.html">Careers</a></li>
                 <li><a href="contact.html" class="contact-btn">Contact Us</a></li>
             </ul>
-            <button class="mobile-menu-btn">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
         </div>
     </nav>
 
@@ -85,35 +89,11 @@
                     </div>
                 </article>
 
-                <!-- Placeholder for demo purposes -->
-                <article class="resource-card news">
-                    <div class="resource-content">
-                        <span class="resource-type">News</span>
-                        <h3>Advantis Expands Remote Monitoring Services</h3>
-                        <p class="date">March 10, 2025</p>
-                        <p class="excerpt">Advantis announces expansion of remote monitoring capabilities to serve more healthcare facilities...</p>
-                        <a href="#">Read more</a>
-                    </div>
-                </article>
-
-                <!-- Placeholder for demo purposes -->
-                <article class="resource-card case">
-                    <div class="resource-content">
-                        <span class="resource-type">Case Study</span>
-                        <h3>Community Health Center Success Story</h3>
-                        <p class="date">February 5, 2025</p>
-                        <p class="excerpt">How a rural community health center improved patient outcomes with remote monitoring...</p>
-                        <a href="#">Read more</a>
-                    </div>
-                </article>
+                <!-- Placeholder for future content -->
+                <!-- Additional resources will appear here as they are added -->
             </div>
             
-            <!-- Pagination -->
-            <div class="pagination">
-                <button class="page-btn active">1</button>
-                <button class="page-btn">2</button>
-                <button class="page-btn">3</button>
-            </div>
+            <!-- Pagination will be added automatically when more content is available -->
         </div>
     </section>
 
@@ -185,6 +165,6 @@
     </div>
 </footer>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=20240621"></script>
 </body>
 </html> 

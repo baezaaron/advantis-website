@@ -3,14 +3,171 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Prevent redirect loops -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>Contact - Advantis</title>
     <link rel="icon" href="images/favicon-32x32.png" type="image/png">
     <!-- Use a combined approach for CSS to prevent caching issues -->
-    <link rel="stylesheet" href="style.css?v=20240620">
-    <link rel="stylesheet" href="common-fixes.css?v=20240620">
+    <link rel="stylesheet" href="style.css?v=20240621">
+    <link rel="stylesheet" href="common-fixes.css?v=20240621">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <style>
+        /* Contact Page Specific Styles */
+        .contact-section {
+            padding: 120px 0 100px;
+        }
+        
+        .contact-section h1 {
+            color: #0066CC;
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .contact-intro {
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            text-align: center;
+            font-size: 1.2rem;
+            line-height: 1.7;
+            color: #555;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+        
+        .contact-form-container {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        .contact-form {
+            font-family: 'Poppins', Arial, sans-serif;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-form input, 
+        .contact-form select, 
+        .contact-form textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background: #fff;
+            font-family: 'Poppins', Arial, sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .contact-form input:focus, 
+        .contact-form select:focus, 
+        .contact-form textarea:focus {
+            border-color: #0066CC;
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+            outline: none;
+        }
+        
+        .contact-form textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .contact-form button {
+            background-color: #0066CC;
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: 'Poppins', Arial, sans-serif;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+            margin-top: 1rem;
+        }
+        
+        .contact-form button:hover {
+            background-color: #005bb8;
+        }
+        
+        .contact-info {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        .info-block {
+            margin-bottom: 2rem;
+        }
+        
+        .info-block h3 {
+            color: #0066CC;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .info-block p {
+            color: #555;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+        
+        .info-block .indent {
+            padding-left: 1.5rem;
+        }
+        
+        .info-block i {
+            color: #0066CC;
+            width: 24px;
+            text-align: center;
+            margin-right: 0.5rem;
+        }
+        
+        @media (min-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 2fr 1fr;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .contact-section h1 {
+                font-size: 3.5rem;
+            }
+            
+            .contact-form-container {
+                padding: 3rem;
+            }
+            
+            .contact-info {
+                padding: 3rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation (same as other pages) -->
@@ -21,6 +178,11 @@
                     <img src="images/Advantis-Logo-200.png" alt="Advantis Logo" class="logo-img">
                 </a>
             </div>
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
@@ -39,11 +201,6 @@
                 <li><a href="careers.html">Careers</a></li>
                 <li><a href="contact.html" class="contact-btn">Contact Us</a></li>
             </ul>
-            <button class="mobile-menu-btn">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
         </div>
     </nav>
 
@@ -171,6 +328,6 @@
     </div>
 </footer>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=20240621"></script>
 </body>
 </html> 

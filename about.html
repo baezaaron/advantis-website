@@ -3,14 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Prevent redirect loops -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>About - Advantis</title>
     <link rel="icon" href="images/favicon-32x32.png" type="image/png">
     <!-- Use a combined approach for CSS to prevent caching issues -->
-    <link rel="stylesheet" href="style.css?v=20240620">
-    <link rel="stylesheet" href="common-fixes.css?v=20240620">
+    <link rel="stylesheet" href="style.css?v=20240621">
+    <link rel="stylesheet" href="common-fixes.css?v=20240621">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <style>
+        /* About Page Specific Styles */
+        .about-hero {
+            padding: 120px 0 60px;
+            background: #f8f9fa;
+            text-align: center;
+        }
+        
+        .about-hero h1 {
+            color: #0066CC;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .about-hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 1.5rem auto;
+            line-height: 1.6;
+        }
+        
+        .about-values {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .value-box {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .value-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 102, 204, 0.15);
+        }
+        
+        .value-box i {
+            font-size: 3rem;
+            color: #0066CC;
+            margin-bottom: 1.5rem;
+            background-color: rgba(0, 102, 204, 0.1);
+            width: 90px;
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .value-box h3 {
+            font-size: 1.5rem;
+            color: #2C3E50;
+            margin-bottom: 1rem;
+        }
+        
+        .value-box p {
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .about-cta {
+            background: #f8f9fa;
+            padding: 80px 0;
+            text-align: center;
+            margin-top: 80px;
+        }
+        
+        .about-cta h2 {
+            color: #0066CC;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+        
+        .about-cta .btn {
+            margin-top: 2rem;
+        }
+        
+        .about-principles {
+            padding: 80px 0;
+        }
+        
+        .about-principles h2 {
+            color: #0066CC;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .about-principles p {
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            text-align: center;
+        }
+        
+        @media (min-width: 768px) {
+            .about-values {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .about-values {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .about-hero h1 {
+                font-size: 3rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation Bar -->
@@ -21,6 +145,11 @@
                     <img src="images/Advantis-Logo-200.png" alt="Advantis Logo" class="logo-img">
                 </a>
             </div>
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
@@ -39,49 +168,40 @@
                 <li><a href="careers.html">Careers</a></li>
                 <li><a href="contact.html" class="contact-btn">Contact Us</a></li>
             </ul>
-            <button class="mobile-menu-btn">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
         </div>
     </nav>
 
     <!-- Hero Section: Mission Statement -->
-    <section class="about-hero" style="padding: 120px 0 60px; background: #f8f9fa; text-align: center;">
+    <section class="about-hero">
         <div class="container">
             <h1>Our Mission</h1>
-            <p style="font-size: 1.3rem; max-width: 700px; margin: 1.5rem auto;">
-                At Advantis, our mission is to improve patient outcomes by delivering proactive, data-driven healthcare solutions. We believe that quality care should be accessible to everyone, and we use real-time data to bring measurable results to the people we serve.
-            </p>
+            <p>At Advantis, our mission is to improve patient outcomes by delivering proactive, data-driven healthcare solutions. We believe that quality care should be accessible to everyone, and we use real-time data to bring measurable results to the people we serve.</p>
         </div>
     </section>
 
     <!-- Principles/Outcomes Section -->
-    <section class="about-principles" style="padding: 60px 0; background: #fff;">
+    <section class="about-principles">
         <div class="container">
-            <h2 style="color: #0044cc;">Bringing Measurable Outcomes with Data</h2>
-            <p style="max-width: 800px; margin: 1.5rem auto; font-size: 1.1rem;">
-                Our advanced technology allows us to monitor patient health in real-time, collecting vital data such as blood pressure, heart rate, and glucose levels. By analyzing this data, we can identify potential issues before they become serious, adjust treatment plans, and provide timely interventions. This data-driven approach leads to better health outcomes and improved quality of life for our patients.
-            </p>
+            <h2>Bringing Measurable Outcomes with Data</h2>
+            <p>Our advanced technology allows us to monitor patient health in real-time, collecting vital data such as blood pressure, heart rate, and glucose levels. By analyzing this data, we can identify potential issues before they become serious, adjust treatment plans, and provide timely interventions. This data-driven approach leads to better health outcomes and improved quality of life for our patients.</p>
             <div class="about-values">
-                <div>
-                    <i class="fas fa-users fa-2x" style="color:#0044cc;"></i>
+                <div class="value-box">
+                    <i class="fas fa-users"></i>
                     <h3>People First</h3>
                     <p>We build relationships based on trust and always put our patients' needs at the center of everything we do.</p>
                 </div>
-                <div>
-                    <i class="fas fa-hand-holding-heart fa-2x" style="color:#0044cc;"></i>
+                <div class="value-box">
+                    <i class="fas fa-hand-holding-heart"></i>
                     <h3>Empathetic & Supportive</h3>
                     <p>We understand the unique needs of every patient and work together to achieve the best outcomes.</p>
                 </div>
-                <div>
-                    <i class="fas fa-lightbulb fa-2x" style="color:#0044cc;"></i>
+                <div class="value-box">
+                    <i class="fas fa-lightbulb"></i>
                     <h3>Uncomplicated</h3>
                     <p>We believe in clear, straightforward communication and solutions that are easy to understand and use.</p>
                 </div>
-                <div>
-                    <i class="fas fa-rocket fa-2x" style="color:#0044cc;"></i>
+                <div class="value-box">
+                    <i class="fas fa-rocket"></i>
                     <h3>Ambitious</h3>
                     <p>We strive to be leaders in our field, using innovation and technology to deliver the best care possible.</p>
                 </div>
@@ -89,84 +209,12 @@
         </div>
     </section>
 
-    <!-- Temporarily hidden team section
-    <section class="team-section" style="padding: 60px 0; background: var(--light-gray);">
-        <div class="container">
-            <h2 style="text-align: center; color: var(--primary-color); margin-bottom: 2rem;">Meet Our Leadership Team</h2>
-            <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; font-size: 1.1rem;">
-                Our experienced team brings together expertise in healthcare, technology, and patient care to deliver innovative solutions that make a difference.
-            </p>
-            <div class="team-grid">
-                <div class="team-member" data-member="1" data-linkedin="https://www.linkedin.com/in/leonelbaez">
-                    <img src="https://via.placeholder.com/200" alt="Leonel Baez" class="team-member-img">
-                    <div class="member-info">
-                        <h3>
-                            Leonel Baez
-                            <a href="https://www.linkedin.com/in/leonelbaez" target="_blank" class="linkedin-link">
-                                <i class="fab fa-linkedin"></i>
-                            </a>
-                        </h3>
-                        <p class="team-title">Chief Executive Officer</p>
-                    </div>
-                    <div class="team-bio" style="display: none;">
-                        <p>Leonel Baez brings over 15 years of healthcare leadership experience to his role as CEO. With a background in healthcare administration and a passion for improving patient outcomes, Leonel has led numerous successful initiatives in healthcare technology and service delivery. His vision for data-driven healthcare solutions has been instrumental in shaping Advantis's innovative approach to patient care.</p>
-                    </div>
-                </div>
-                <div class="team-member" data-member="2" data-linkedin="https://www.linkedin.com/in/aaron-baez">
-                    <img src="rpm-website/images/Aaron-headshot.jpg" alt="Aaron Baez" class="team-member-img">
-                    <div class="member-info">
-                        <h3>
-                            Aaron Baez
-                            <a href="https://www.linkedin.com/in/aaron-baez" target="_blank" class="linkedin-link">
-                                <i class="fab fa-linkedin"></i>
-                            </a>
-                        </h3>
-                        <p class="team-title">Chief Operational Officer</p>
-                    </div>
-                    <div class="team-bio" style="display: none;">
-                        <p>Aaron Baez oversees all operational aspects of Advantis, ensuring seamless delivery of our healthcare services. With expertise in healthcare operations and technology implementation, Aaron has been crucial in developing and optimizing our service delivery systems. His focus on operational excellence and process improvement has helped establish Advantis as a leader in proactive healthcare management.</p>
-                    </div>
-                </div>
-                <div class="team-member" data-member="3" data-linkedin="https://www.linkedin.com/in/sugeyris-lopez-baez-1a6463116">
-                    <img src="https://via.placeholder.com/200" alt="Sugeyris Lopez-Baez" class="team-member-img">
-                    <div class="member-info">
-                        <h3>
-                            Sugeyris Lopez-Baez
-                            <a href="https://www.linkedin.com/in/sugeyris-lopez-baez-1a6463116" target="_blank" class="linkedin-link">
-                                <i class="fab fa-linkedin"></i>
-                            </a>
-                        </h3>
-                        <p class="team-title">Chief Nursing Officer</p>
-                    </div>
-                    <div class="team-bio" style="display: none;">
-                        <p>Sugeyris Lopez-Baez leads our clinical operations with over a decade of nursing and healthcare management experience. Her expertise in patient care and clinical protocols ensures that Advantis delivers the highest standard of healthcare services. Sugeyris's commitment to patient-centered care and evidence-based practices has been fundamental in developing our comprehensive care programs.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal for team member details -->
-        <div id="team-modal" class="modal">
-            <div class="modal-content">
-                <span class="close-btn">&times;</span>
-                <img id="modal-img" src="" alt="" class="modal-img">
-                <h3 id="modal-name"></h3>
-                <a id="modal-linkedin" href="#" target="_blank" class="linkedin-link">
-                    <i class="fab fa-linkedin"></i>
-                </a>
-                <p id="modal-title"></p>
-                <div id="modal-desc"></div>
-            </div>
-        </div>
-    </section>
-    -->
-
     <!-- Call to Action Section -->
-    <section class="about-cta" style="background: #f8f9fa; padding: 60px 0; text-align: center;">
+    <section class="about-cta">
         <div class="container">
             <h2>Ready to Experience Data-Driven Healthcare?</h2>
             <p>Contact us today to learn how Advantis can help you achieve better health outcomes.</p>
-            <a href="contact.html" class="btn btn-primary" style="margin-top: 1.5rem;">Get Started</a>
+            <a href="contact.html" class="btn btn-primary">Get Started</a>
         </div>
     </section>
 
@@ -239,6 +287,6 @@
 </footer>
 
 <!-- Add this before </body> -->
-<script src="script.js"></script>
+<script src="script.js?v=20240621"></script>
 </body>
 </html> 

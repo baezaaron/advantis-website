@@ -1,0 +1,51 @@
+# Prevent redirect loops
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  
+  # Ensure HTTPS only if not already on HTTPS and not on localhost
+  RewriteCond %{HTTPS} off
+  RewriteCond %{HTTP_HOST} !^localhost [NC]
+  RewriteCond %{HTTP_HOST} !^127\.0\.0\.1 [NC]
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+  
+  # Prevent redirect loops
+  RewriteCond %{ENV:REDIRECT_STATUS} 200
+  RewriteRule ^ - [L]
+  
+  # Ensure www prefix if not already there and not on localhost
+  RewriteCond %{HTTP_HOST} !^www\. [NC]
+  RewriteCond %{HTTP_HOST} !^localhost [NC]
+  RewriteCond %{HTTP_HOST} !^127\.0\.0\.1 [NC]
+  RewriteRule ^(.*)$ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+# Set cache control for better performance
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css "access plus 1 week"
+  ExpiresByType application/javascript "access plus 1 week"
+  ExpiresByType image/jpg "access plus 1 month"
+  ExpiresByType image/jpeg "access plus 1 month"
+  ExpiresByType image/gif "access plus 1 month"
+  ExpiresByType image/png "access plus 1 month"
+  ExpiresByType image/svg+xml "access plus 1 month"
+  ExpiresByType image/webp "access plus 1 month"
+  ExpiresByType image/x-icon "access plus 1 year"
+  ExpiresByType font/ttf "access plus 1 month"
+  ExpiresByType font/woff "access plus 1 month"
+  ExpiresByType font/woff2 "access plus 1 month"
+</IfModule>
+
+# Fix CORS issues that might affect loading resources
+<IfModule mod_headers.c>
+  Header set Access-Control-Allow-Origin "*"
+  Header set Access-Control-Allow-Methods "GET, POST, OPTIONS"
+  Header set Access-Control-Allow-Headers "Origin, X-Requested-With, Content-Type, Accept"
+</IfModule>
+
+# Force browsers to use the latest rendering engine
+<IfModule mod_headers.c>
+  Header set X-UA-Compatible "IE=edge,chrome=1"
+  Header set X-Content-Type-Options "nosniff"
+</IfModule> 

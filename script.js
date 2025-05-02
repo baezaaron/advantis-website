@@ -2,6 +2,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // First priority: Force cache refresh for all stylesheets
     forceStyleRefresh();
     
+    // Add anchor link offset handling
+    handleAnchorLinks();
+    
     // Mobile Menu Toggle
     setupMobileMenu();
     
@@ -43,6 +46,62 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Add inline style for additional fixes if needed
         addInlineStyles();
+    }
+    
+    // Handle anchor links with offset for fixed header
+    function handleAnchorLinks() {
+        // Check if we have a hash in the URL on page load
+        if (window.location.hash) {
+            // Wait a brief moment for the page to settle
+            setTimeout(function() {
+                const targetId = window.location.hash.substring(1);
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    scrollToElementWithOffset(targetElement, 100);
+                }
+            }, 100);
+        }
+        
+        // Add click event listeners to all internal anchor links
+        const anchorLinks = document.querySelectorAll('a[href^="#"]');
+        anchorLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href').substring(1);
+                if (targetId) {
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        e.preventDefault();
+                        scrollToElementWithOffset(targetElement, 100);
+                        
+                        // Update URL without scrolling
+                        if (history.pushState) {
+                            history.pushState(null, null, `#${targetId}`);
+                        }
+                    }
+                }
+            });
+        });
+        
+        // Also handle Learn More links that point to anchors on other pages
+        const externalAnchorLinks = document.querySelectorAll('a.learn-more[href*="#"]');
+        externalAnchorLinks.forEach(link => {
+            // Store the offset in a data attribute to be used when the target page loads
+            link.setAttribute('data-scroll-offset', 'true');
+        });
+    }
+    
+    // Scroll to element with offset
+    function scrollToElementWithOffset(element, offset) {
+        if (!element) return;
+        
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - offset;
+        
+        window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+        });
     }
     
     // Setup mobile menu functionality
@@ -150,27 +209,96 @@ document.addEventListener('DOMContentLoaded', function() {
     function setupResourceFiltering() {
         const filterButtons = document.querySelectorAll('.filter-btn');
         const resourceCards = document.querySelectorAll('.resource-card');
-    
-        if (filterButtons.length > 0) {
-            filterButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    // Remove active class from all buttons
-                    filterButtons.forEach(btn => btn.classList.remove('active'));
-                    // Add active class to clicked button
-                    button.classList.add('active');
+        const resourcesContainer = document.querySelector('.resources-container');
+        
+        if (!filterButtons.length || !resourcesContainer) return;
+        
+        // Check if we need pagination
+        function updatePagination() {
+            const visibleCards = document.querySelectorAll('.resource-card:not([style*="display: none"])');
+            let paginationContainer = document.querySelector('.pagination');
+            
+            // If there are more than 6 visible items, we need pagination
+            const needsPagination = visibleCards.length > 6;
+            
+            // If we need pagination but don't have the container yet
+            if (needsPagination && !paginationContainer) {
+                paginationContainer = document.createElement('div');
+                paginationContainer.className = 'pagination';
+                
+                // Create page buttons based on the number of cards (6 per page)
+                const pageCount = Math.ceil(visibleCards.length / 6);
+                
+                for (let i = 1; i <= pageCount; i++) {
+                    const pageBtn = document.createElement('button');
+                    pageBtn.className = 'page-btn' + (i === 1 ? ' active' : '');
+                    pageBtn.textContent = i;
                     
-                    const filter = button.dataset.filter;
-                    
-                    resourceCards.forEach(card => {
-                        if (filter === 'all' || card.classList.contains(filter)) {
-                            card.style.display = 'block';
-                        } else {
-                            card.style.display = 'none';
+                    pageBtn.addEventListener('click', function() {
+                        // Update active state
+                        document.querySelectorAll('.page-btn').forEach(btn => btn.classList.remove('active'));
+                        this.classList.add('active');
+                        
+                        // Show/hide appropriate cards
+                        const pageIndex = parseInt(this.textContent);
+                        const startIdx = (pageIndex - 1) * 6;
+                        const endIdx = startIdx + 6;
+                        
+                        Array.from(visibleCards).forEach((card, idx) => {
+                            card.style.display = (idx >= startIdx && idx < endIdx) ? 'block' : 'none';
+                        });
+                        
+                        // Scroll to top of resource section
+                        const resourcesSection = document.querySelector('.resources-grid');
+                        if (resourcesSection) {
+                            scrollToElementWithOffset(resourcesSection, 100);
                         }
                     });
+                    
+                    paginationContainer.appendChild(pageBtn);
+                }
+                
+                // Add to DOM after the resources container
+                resourcesContainer.after(paginationContainer);
+                
+                // Initially show only first page
+                Array.from(visibleCards).forEach((card, idx) => {
+                    card.style.display = idx < 6 ? 'block' : 'none';
                 });
-            });
+            } 
+            // If we have pagination but don't need it
+            else if (!needsPagination && paginationContainer) {
+                paginationContainer.remove();
+                
+                // Show all cards
+                visibleCards.forEach(card => card.style.display = 'block');
+            }
         }
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                const filter = button.dataset.filter;
+                
+                resourceCards.forEach(card => {
+                    if (filter === 'all' || card.classList.contains(filter)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                
+                // Update pagination after filtering
+                updatePagination();
+            });
+        });
+        
+        // Run initially to set up pagination if needed
+        updatePagination();
     }
     
     // Setup team modal functionality
