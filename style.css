@@ -56,7 +56,7 @@ h1 { font-size: 2rem; font-weight: 700; }
 h2 { font-size: 1.75rem; font-weight: 600; }
 p { margin-bottom: 1rem; }
 
-/* Layout */
+/* Layout - Mobile First */
 .container {
     width: 100%;
     padding-left: 1rem;
@@ -165,12 +165,6 @@ p { margin-bottom: 1rem; }
     color: var(--text-color);
 }
 
-.hero-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-}
-
 /* Buttons */
 .btn {
     display: inline-block;
@@ -190,6 +184,7 @@ p { margin-bottom: 1rem; }
 .btn-primary:hover {
     background: #005bb8;
     transform: translateY(-2px);
+    color: var(--white);
 }
 
 /* Stats Section */
@@ -649,3 +644,6 @@ p { margin-bottom: 1rem; }
     transform: translateY(-2px);
     color: var(--white) !important;
 }
+
+/* Only include mobile-first styles in this file.
+   Desktop styles are now in desktop.css */
