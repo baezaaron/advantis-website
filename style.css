@@ -295,8 +295,9 @@ p { margin-bottom: 1rem; }
 
 .service-card i {
     font-size: 2.5rem;
-    color: var(--primary-color);
+    color: #0066CC;
     margin-bottom: 1.5rem;
+    display: block;
 }
 
 .service-card h3 {
@@ -440,8 +441,10 @@ p { margin-bottom: 1rem; }
 
     h1 { font-size: 2.5rem; }
     
+    /* Navigation */
     .nav-container {
         max-width: 720px;
+        padding: 0 2rem;
     }
 
     .nav-links {
@@ -451,14 +454,22 @@ p { margin-bottom: 1rem; }
         background: none;
         box-shadow: none;
         padding: 0;
+        gap: 1rem;
     }
 
     .nav-links a {
-        padding: 0.5rem 1rem;
+        padding: 0.5rem 0.75rem;
+        font-size: 0.9rem;
     }
 
     .mobile-menu-btn {
         display: none;
+    }
+
+    /* Hero Section */
+    .hero {
+        padding-top: 120px;
+        padding-bottom: 3rem;
     }
 
     .hero-content {
@@ -469,18 +480,29 @@ p { margin-bottom: 1rem; }
         font-size: 2.5rem;
     }
 
+    /* Stats Section */
+    .stats {
+        padding: 4rem 0;
+    }
+
     .stats-grid {
         grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+    }
+
+    /* Proactive Section */
+    .proactive-care {
+        padding: 4rem 0;
     }
 
     .proactive-grid {
         grid-template-columns: 1fr 1fr;
         align-items: center;
-        gap: 4rem;
+        gap: 3rem;
     }
 
     .proactive-image {
-        height: 400px;
+        height: 350px;
     }
 
     .proactive-content {
@@ -488,12 +510,110 @@ p { margin-bottom: 1rem; }
         padding: 0;
     }
 
+    /* Services Section */
+    .services {
+        padding: 4rem 0;
+    }
+
     .services-grid {
         grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+    }
+
+    /* Partners Section */
+    .partners {
+        padding: 4rem 0;
+    }
+
+    /* Footer */
+    .footer {
+        background: #FFFFFF;
+        padding: 4rem 0 2rem;
     }
 
     .footer-grid {
         grid-template-columns: repeat(4, 1fr);
+        gap: 2rem;
+    }
+
+    .footer-logo {
+        height: 35px;
+        width: auto;
+    }
+
+    /* Elements that need to be adjusted for tablet */
+    section {
+        margin-bottom: 0;
+    }
+    
+    /* Fix for sections being too close */
+    section + section {
+        margin-top: 1rem;
+    }
+
+    /* Service Details Page */
+    .services-hero {
+        padding-top: 120px;
+        padding-bottom: 2rem;
+    }
+
+    .services-detailed {
+        padding: 3rem 0;
+    }
+
+    .service-detail {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 2rem;
+        margin-bottom: 3rem;
+        padding: 2rem;
+    }
+
+    .service-content {
+        flex: 3;
+    }
+
+    .service-icon {
+        flex: 1;
+        font-size: 4rem;
+    }
+
+    /* Resources Page */
+    .resources-hero {
+        padding-top: 120px;
+        padding-bottom: 2rem;
+    }
+
+    .resources-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+
+    /* Contact Page */
+    .contact-section {
+        padding-top: 120px;
+        padding-bottom: 4rem;
+    }
+
+    .contact-grid {
+        display: grid;
+        grid-template-columns: 3fr 2fr;
+        gap: 2rem;
+    }
+
+    /* About Page */
+    .about-hero {
+        padding-top: 120px;
+        padding-bottom: 3rem;
+    }
+
+    .about-values {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        margin-top: 3rem;
     }
 }
 
@@ -643,6 +763,34 @@ p { margin-bottom: 1rem; }
     background: #005bb8;
     transform: translateY(-2px);
     color: var(--white) !important;
+}
+
+/* Service Icons */
+.service-icon i {
+    font-size: 2.5rem;
+    color: #0066CC;
+    margin-bottom: 1rem;
+}
+
+/* Service Details Page */
+.service-detail {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+
+.service-content {
+    flex: 1;
+}
+
+.service-icon {
+    font-size: 3rem;
+    color: #0066CC;
+    margin-top: 1.5rem;
+    text-align: center;
 }
 
 /* Only include mobile-first styles in this file.
